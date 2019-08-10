@@ -1,3 +1,4 @@
+
 var globalHPA = [];
 var globalAtkA = [];
 var globalHPB = [];
@@ -231,90 +232,113 @@ $(document).on('click', function () {
 var aScore = 0;
 var bScore = 0;
 $(document).on('click', '#fightOnce', function () {
-    start = false;
-    fightRound++;
-    console.log('round ' + fightRound);
+    if ((aScore + bScore + ties != 4) && (globalHPA.length >= 4) && (globalHPB.length >= 4)) {
+        start = false;
+        fightRound++;
+        console.log('round ' + fightRound);
 
 
-    if ((globalHPA.length >= 4) && (globalHPB.length >= 4)) {
-        var compareA = [];
-        var compareB = [];
+        if ((globalHPA.length >= 4) && (globalHPB.length >= 4)) {
+            var compareA = [];
+            var compareB = [];
 
 
 
 
-        for (var i = 0; i < 4; i++) {
+            for (var i = 0; i < 4; i++) {
 
-            if (isScoring[i] == true) {
-                compareA[i] = (globalHPA[i] - globalAtkB[i] * fightRound);
-                compareB[i] = (globalHPB[i] - globalAtkA[i] * fightRound);
+                if (isScoring[i] == true) {
+                    compareA[i] = (globalHPA[i] - globalAtkB[i] * fightRound);
+                    compareB[i] = (globalHPB[i] - globalAtkA[i] * fightRound);
+                } else {
+                    compareA[i] = finalA[i];
+                    compareB[i] = finalB[i];
+                }
+
+                //tie
+                if ((compareA[i] <= 0) && (compareB[i] <= 0) && (isScoring[i] == true)) {
+                    ties++;
+
+                    compareA[i] = 0;
+                    compareB[i] = 0;
+                    finalA[i] = compareA[i];
+                    finalB[i] = compareB[i];
+                    $('#tie').text(ties);
+                    isScoring[i] = false;
+
+                    //b win
+                } else if ((compareA[i] <= 0) && (isScoring[i] == true)) {
+                    bScore++
+                    compareA[i] = 0;
+                    finalA[i] = compareA[i];
+                    finalB[i] = compareB[i];
+                    $('#bWin').text(bScore);
+                    isScoring[i] = false;
+
+                    //a win
+                } else if ((compareB[i] <= 0) && (isScoring[i] == true)) {
+                    aScore++
+                    compareB[i] = 0;
+                    finalA[i] = compareA[i];
+                    finalB[i] = compareB[i];
+                    $('#aWin').text(aScore);
+                    isScoring[i] = false;
+
+                }
+            }
+
+        }
+        console.log('compareA: ' + compareA);
+        console.log('compareB: ' + compareB);
+
+        $('#emeraldCompare').text(Math.ceil(compareA[0] / globalHPA[0] * 100) + '%' + ' (' + globalHPA[0] + ')');
+        $('#rubyCompare').text(Math.ceil(compareA[1] / globalHPA[1] * 100) + '%' + ' (' + globalHPA[1] + ')');
+        $('#diamondCompare').text(Math.ceil(compareA[2] / globalHPA[2] * 100) + '%' + ' (' + globalHPA[2] + ')');
+        $('#sapphireCompare').text(Math.ceil(compareA[3] / globalHPA[3] * 100) + '%' + ' (' + globalHPA[3] + ')');
+
+        $('#emeraldCompare2').text(Math.ceil(compareB[0] / globalHPB[0] * 100) + '%' + ' (' + globalHPB[0] + ')');
+        $('#rubyCompare2').text(Math.ceil(compareB[1] / globalHPB[1] * 100) + '%' + ' (' + globalHPB[1] + ')');
+        $('#diamondCompare2').text(Math.ceil(compareB[2] / globalHPB[2] * 100) + '%' + ' (' + globalHPB[2] + ')');
+        $('#sapphireCompare2').text(Math.ceil(compareB[3] / globalHPB[3] * 100) + '%' + ' (' + globalHPB[3] + ')');
+
+
+        if (aScore + bScore + ties == 4) {
+            if (aScore > bScore) {
+                console.log('a wins');
+            } else if (bScore > aScore) {
+                console.log('b wins');
             } else {
-                compareA[i] = finalA[i];
-                compareB[i] = finalB[i];
+                console.log('tie');
             }
-
-            //tie
-            if ((compareA[i] <= 0) && (compareB[i] <= 0) && (isScoring[i] == true)) {
-                ties++;
-
-                compareA[i] = 0;
-                compareB[i] = 0;
-                finalA[i] = compareA[i];
-                finalB[i] = compareB[i];
-                $('#tie').text(ties);
-                isScoring[i] = false;
-
-                //b win
-            } else if ((compareA[i] <= 0) && (isScoring[i] == true)) {
-                bScore++
-                compareA[i] = 0;
-                finalA[i] = compareA[i];
-                finalB[i] = compareB[i];
-                $('#bWin').text(bScore);
-                isScoring[i] = false;
-
-                //a win
-            } else if ((compareB[i] <= 0) && (isScoring[i] == true)) {
-                aScore++
-                compareB[i] = 0;
-                finalA[i] = compareA[i];
-                finalB[i] = compareB[i];
-                $('#aWin').text(aScore);
-                isScoring[i] = false;
-
-            }
+            reset();
         }
 
+
     }
-    console.log('compareA: ' + compareA);
-    console.log('compareB: ' + compareB);
-
-    $('#emeraldCompare').text(compareA[0] + ' (' + globalHPA[0] + ')');
-    $('#rubyCompare').text(compareA[1] + ' (' + globalHPA[1] + ')');
-    $('#diamondCompare').text(compareA[2] + ' (' + globalHPA[2] + ')');
-    $('#sapphireCompare').text(compareA[3] + ' (' + globalHPA[3] + ')');
-
-    $('#emeraldCompare2').text(compareB[0] + ' (' + globalHPB[0] + ')');
-    $('#rubyCompare2').text(compareB[1] + ' (' + globalHPB[1] + ')');
-    $('#diamondCompare2').text(compareB[2] + ' (' + globalHPB[2] + ')');
-    $('#sapphireCompare2').text(compareB[3] + ' (' + globalHPB[3] + ')');
-
-    /*reset function wip/
-    if (aScore + bScore + ties == 4) {
-        globalHPA = [];
-        globalHPB = [];
-        globalAtkA = [];
-        globalAtkA = [];
-        finalA = [0, 0, 0, 0];
-        finalB = [0, 0, 0, 0];
-    }
-end reset wip*/
-
-
 })
 
 
 
+
+
+
+function reset() {
+    globalHPA = [];
+    globalAtkA = [];
+    globalHPB = [];
+    globalAtkB = [];
+    fightRound = 0;
+    finalA = [0, 0, 0, 0];
+    finalB = [0, 0, 0, 0];
+    aScore = 0;
+    bScore = 0;
+    ties = 0;
+    isScoring = [true, true, true, true];
+    start = true;
+    $('#aWin').text(aScore);
+    $('#bWin').text(bScore);
+    $('#tie').text(ties);
+}
     //globalTeamA = [];
     //globalTeamB = [];
 
