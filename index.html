@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Food Fighter</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+    <h1>Placeholder Title: Food Fighter</h1>
+
+    <div id="instructions">
+        <p>Cards will spawn with random values for now. Cards will fight against the card directly above or below
+            themselves</p>
+        <p>Console will display w/l/t after both Team A and B have new sets of values</p>
+    </div>
+
+    <div id='Debug Buttons'>
+        <button id="allGemSpawn">All gem Spawn</button>
+        <button id="teamAAll">Team A gems</button>
+        <button id="teamBAll">Team B gems</button>
+        <button id="fightOnce">Fight Once</button>
+    </div>
+    <br>
+
+    <div id="winLoss">
+        <p>Team A Wins: <span id='aWin'></span></p>
+        <p>Team B Wins: <span id='bWin'></span></p>
+        <p>Ties: <span id='tie'></span></p>
+    </div>
+
+    <!-- source: https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bb3df739-d047-4430-8994-f559512aabe7/dcjpzwp-53619b1c-e7df-401e-806f-01775367702a.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2JiM2RmNzM5LWQwNDctNDQzMC04OTk0LWY1NTk1MTJhYWJlN1wvZGNqcHp3cC01MzYxOWIxYy1lN2RmLTQwMWUtODA2Zi0wMTc3NTM2NzcwMmEuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.9CO15rOWdHEy_dIYQukqXkOa0qoswWviYTDF2OzeOI8 -->
+    <div id="gems">
+        <img id='emerald' src="assets/images/emerald.png" hiddenv="">
+        <img id='ruby' src="assets/images/ruby.png" hiddenv="">
+        <img id='diamond' src="assets/images/diamond.png" hiddenv="">
+        <img id='sapphire' src="assets/images/sapphire.png" hiddenv="">
+        <span>Placeholder: Team A</span>
+    </div>
+
+    <div id='TeamAStatic'>
+        <span id='emeraldStatsA'>Atk/HP</span>
+        <span id='rubyStatsA'>Atk/HP</span>
+        <span id='diamondStatsA'>Atk/HP</span>
+        <span id='sapphireStatsA'>Atk/HP</span>
+    </div>
+    <br>
+    <br>
+    <div id='scoreGems'>
+        <span id='emeraldValue'></span>
+        <span id='rubyValue'></span>
+        <span id='diamondValue'></span>
+        <span id='sapphireValue'></span>
+    </div>
+    <br>
+    <br>
+    <div id="gems2">
+        <img id='emerald2' src="assets/images/emerald.png" hiddenv="">
+        <img id='ruby2' src="assets/images/ruby.png" hiddenv="">
+        <img id='diamond2' src="assets/images/diamond.png" hiddenv="">
+        <img id='sapphire2' src="assets/images/sapphire.png" hiddenv="">
+        <span>Placeholder: Team B</span>
+    </div>
+    <div id='TeamBStatic'>
+        <span id='emeraldStatsB'>Atk/HP</span>
+        <span id='rubyStatsB'>Atk/HP</span>
+        <span id='diamondStatsB'>Atk/HP</span>
+        <span id='sapphireStatsB'>Atk/HP</span>
+    </div>
+    <br>
+    <br>
+    <div id='scoreGems2'>
+        <span id='emeraldValue2'></span>
+        <span id='rubyValue2'></span>
+        <span id='diamondValue2'></span>
+        <span id='sapphireValue2'></span>
+    </div>
+    <br>
+    <br>
+    <p>Remaining life, A, B</p>
+    <div id='scoreCompare'>
+        <span id='emeraldCompare'>?</span>
+        <span id='rubyCompare'>?</span>
+        <span id='diamondCompare'>?</span>
+        <span id='sapphireCompare'>?</span>
+    </div>
+    <br>
+    <br>
+    <div id='scoreCompare2'>
+        <span id='emeraldCompare2'>?</span>
+        <span id='rubyCompare2'>?</span>
+        <span id='diamondCompare2'>?</span>
+        <span id='sapphireCompare2'>?</span>
+    </div>
+    <br>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/game.js"></script>
+
+
+
+
+
+</body>
+
+</html>
