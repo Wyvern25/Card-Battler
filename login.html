@@ -19,8 +19,6 @@
 
 <body>
   
-  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
-
   <div class="container-fluid">
     <div class="d-flex justify-content-center">
       <header>
@@ -28,66 +26,31 @@
       </header>
     
       <!--================FireBase Authentication==================-->
-      
-      <main class="card-group">
-        <section class="card">
-          <div class="card-body">
-            <h4 class="card-title">Login</h4>
-            <form>
-              <div class="form-group">
-                <label for="signInEmail">Email Address</label>
-                <input type="email" class="form-control" id="signInEmail" autocomplete="username">
-              </div>
-              <div class="form-group">
-                <label for="signInPassword">Password</label>
-                <input type="password" class="form-control" id="signInPassword" autocomplete="current-password">
-                <small><a href="forgot-password.html">Forgot password?</a></small>
-              </div>
-              <div class="form-group">
-                <button type="submit" id="signIn">Login</button>
-              </div>
-              <div>
-                <small>Don't have a account? <a href="#">Create One</a></small>
-              </div>
-            </form>
-          </div>
-        </section>
-
-        <section class="card">
-          <div class="card-body">
-            <h4>Create Account</h4>
-            <form>
-              <div class="form-group">
-                <label for="signUpEmail">Email Address</label>
-                <input type="email" class="form-control" id="signUpEmail" autocomplete="username">
-              </div>
-              <div class="form-group">
-                <label for="signUpPassword">Password</label>
-                <input type="password" class="form-control" id="signUpPassword" autocomplete="new-password">
-              </div>
-              <div class="form-group">
-                <button type="submit" id="signUp">Sign Up</button>
-              </div>
-            </form>
-          </div>
-        </section>
-        
-        <section class="card">
-          <div class="card-body">
-            <h4>Send Password Reset Email</h4>
-            <form>
-              <div class="form-group">
-                <label for="resetEmail">Email Address</label>
-                <input type="email" class="form-control" id="resetEmail">
-              </div>
-              <div class="form-group">
-                <button type="submit" id="passwordReset">Send</button>
-              </div>
-            </form>
-          </div>
-        </section>
-      </main>
-
+      <section class="card">
+        <div class="card-body">
+          <h4 class="card-title">Login</h4>
+          <form>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="text" class="form-control" id="email" name="email" placeholder="username">
+            </div>
+            <div class="form-group">
+              <label for="password">Password<small><a href="#" id="forgot">Forgot password?</a></small></label>
+              <input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="password">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary" type="submit" id="logIn" name="login">Login</button>
+              <button class="btn btn-primary" type="submit" id="signUp" name="signup">Sign Up</button>
+              <button class="btn btn-info" type="submit" id="verifyEmail" name="verify-email">Send Email Verification</button>
+              <button class="btn btn-info" type="submit" id="resetPassword" name="verify-email">Send Password Reset Email</button>
+            </div>
+            <div class="card-footer">
+              <small>Don't have a account? <a href="#">Create One</a></small>
+            </div>
+    
+          </form>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -95,35 +58,36 @@
   <!--===============Display Testing Area===================-->
 
   <div class="quickstart-user-details-container">
-    Firebase sign-in status: <span id="quickstart-sign-in-status">Unknown</span>
+    Firebase sign-in status: <span id="sign-in-status">Unknown</span>
     <div>Firebase auth <code>currentUser</code> object value:</div>
-    <pre><code id="quickstart-account-details">null</code></pre>
+    <pre><code id="account-details">null</code></pre>
   </div>
 
 
   <!---=================SCRIPT AREA=================-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
 
-  <!-- TODO: Add SDKs for Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-auth.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+     <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
 
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyBKbmD2C52-tYod9tnoFhtbsVw5bXIpLG0",
-      authDomain: "project-1-50020.firebaseapp.com",
-      databaseURL: "https://project-1-50020.firebaseio.com",
-      projectId: "project-1-50020",
-      storageBucket: "",
-      messagingSenderId: "541022669951",
-      appId: "1:541022669951:web:ed0a48cfa4b40e02"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-  </script>
-
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBKbmD2C52-tYod9tnoFhtbsVw5bXIpLG0",
+    authDomain: "project-1-50020.firebaseapp.com",
+    databaseURL: "https://project-1-50020.firebaseio.com",
+    projectId: "project-1-50020",
+    storageBucket: "project-1-50020.appspot.com",
+    messagingSenderId: "541022669951",
+    appId: "1:541022669951:web:750dc928c07a8afb"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+  
   <!--Bootstrap JS-->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
@@ -131,7 +95,6 @@
 
   <!--Customized JS-->
   <script type="text/javascript" src="assets/javascript/firebaseTracy.js"></script>
-
 
 </body>
 
