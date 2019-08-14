@@ -1,4 +1,6 @@
-	var listFoods = ['big mac', 'pasta', 'chicken', 'pizza', 'burrito', 'steak']
+	var mainFoods = ['whopper', 'spaghetti', 'mcchicken', 'pizza', 'burrito', 'ramen']
+	var sideFoods = ['fries', 'potatoes', 'salad', 'beans', 'breadsticks', 'chowder']
+	var desserts = ['pie', 'cookie', 'cake', 'donut', 'flan', 'ice cream']
 	var foodItem;
 	var foodAPI;
 	var foodArray = [];
@@ -26,20 +28,36 @@
 				foodObj[cardSelect].display	= true		
 			}
 		} else if (cardSelect === '2') {
-			console.log('hello')
+			if (foodObj[cardSelect].display) {
+				$('.card-2').empty();
+				foodObj[cardSelect].display	= false		
+			} else {
+				var img = $('<img>');
+				img.attr('src', $(this).attr('data-src'))
+				$('.card-2').append(img);	
+				foodObj[cardSelect].display	= true		
+			}		
 		} else if (cardSelect === '3') {
-			console.log('this is 3')
+			if (foodObj[cardSelect].display) {
+				$('.card-3').empty();
+				foodObj[cardSelect].display	= false		
+			} else {
+				var img = $('<img>');
+				img.attr('src', $(this).attr('data-src'))
+				$('.card-3').append(img);	
+				foodObj[cardSelect].display	= true		
+			}
 		}
 		console.log($(this).attr("data-column"))
 	})
 
-	function foodStats() {
-      for (var i=0; i<listFoods.length; i++) {
-        foodItem = listFoods[i];
+	function mainEntreeStats() {
+      for (var i=0; i<mainFoods.length; i++) {
+        foodItem = mainFoods[i];
 
         foodAPI = foodItem.split(' ').join('%20')
-        console.log(foodAPI)
-        var queryURL = 'https://api.edamam.com/api/food-database/parser?ingr=' + listFoods[i] + '&app_id=4cb41cfc&app_key=e6e46f2b3d8ad790a36acf6989e22ea1';
+        var APIkey1 = '6c5995fa07c3dd42ab33c898425c550a';
+        var queryURL1 = 'https://api.edamam.com/api/food-database/parser?ingr=' + mainFoods[i] + '&app_id=4cb41cfc&app_key=' + APIkey1;
  
         console.log(queryURL)
 
@@ -48,15 +66,85 @@
         url: queryURL,
         method: "GET"
       }).then(function(response) {
-        //var foodNutrients = response.hints[0].food.nutrients;
+        var foodNutrients = response.hints[0].food.nutrients;
         console.log(foodNutrients)
-        //foodArray.push(foodNutrients)
+        foodArray.push(foodNutrients)
 
-      		$('.item-1').text('Calories:' + foodArray[0].ENERC_KCAL);
-      		$('.item-1').append('Protein: ' + foodArray[0].FAT)
-        });
-
+	        for (var j=1; j<=foodArray.length; j++) {
+	      		$('.item-' + j).text('Calories:' + foodArray[j-1].ENERC_KCAL + '\n');
+	      		$('.item-' + j).append('Protein: ' + foodArray[j-1].PROCNT+ '\n');
+	      		$('.item-' + j).append('Fat: ' + foodArray[j-1].FAT + '\n');
+	      		$('.item-' + j).append('Carbs: ' + foodArray[j-1].CHOCDF);
+	        }
+      	});
       }
       console.log(foodArray);
     }
-    //foodStats();
+
+	function sideDishStats() {
+      for (var i=0; i<sideFoods.length; i++) {
+        foodItem = sideFoods[i];
+
+        foodAPI = foodItem.split(' ').join('%20')
+        var APIkey2 = 'ca199ed290602300fee474300b19a7ed';
+        var queryURL2 = 'https://api.edamam.com/api/food-database/parser?ingr=' + sideFoods[i] + '&app_id=4cb41cfc&app_key=' + APIkey2;
+ 
+        console.log(queryURL)
+
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(response) {
+        var foodNutrients = response.hints[0].food.nutrients;
+        console.log(foodNutrients)
+        foodArray.push(foodNutrients)
+
+	        for (var j=1; j<=foodArray.length; j++) {
+	      		$('.item-' + j).text('Calories:' + foodArray[j-1].ENERC_KCAL + '\n');
+	      		$('.item-' + j).append('Protein: ' + foodArray[j-1].PROCNT+ '\n');
+	      		$('.item-' + j).append('Fat: ' + foodArray[j-1].FAT + '\n');
+	      		$('.item-' + j).append('Carbs: ' + foodArray[j-1].CHOCDF);
+	        }
+      	});
+      }
+      console.log(foodArray);
+    }
+
+	function dessertStats() {
+      for (var i=0; i<desserts.length; i++) {
+        foodItem = desserts[i];
+
+        foodAPI = foodItem.split(' ').join('%20')
+        var APIkey3 = 'bd8398262899eee9c356a37a4505df49';
+        var queryURL3 = 'https://api.edamam.com/api/food-database/parser?ingr=' + desserts[i] + '&app_id=4cb41cfc&app_key=' + APIkey3;
+ 
+        console.log(queryURL)
+
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(response) {
+        var foodNutrients = response.hints[0].food.nutrients;
+        console.log(foodNutrients)
+        foodArray.push(foodNutrients)
+
+	        for (var j=1; j<=foodArray.length; j++) {
+	      		$('.item-' + j).text('Calories:' + foodArray[j-1].ENERC_KCAL + '\n');
+	      		$('.item-' + j).append('Protein: ' + foodArray[j-1].PROCNT+ '\n');
+	      		$('.item-' + j).append('Fat: ' + foodArray[j-1].FAT + '\n');
+	      		$('.item-' + j).append('Carbs: ' + foodArray[j-1].CHOCDF);
+	        }
+      	});
+      }
+      console.log(foodArray);
+    }    
+    //mainEntreeStats();
+    //sideDishStats();
+
+
+
+
+
+
