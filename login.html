@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Food Fighter Authentication</title>
+
+  <!--Link reboot/reset CSS-->
+  <link rel="stylesheet" href="assets/css/reset.css">
+
+  <!--Link Bootstrap 4-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!--Link game CSS-->
+  <link rel="stylesheet" href="assets/css/styleTracy.css">
+</head>
+
+<body>
+  
+  <div class="container-fluid">
+    <div class="d-flex justify-content-center">
+      <header>
+        <h2>Food Fighter</h2>
+      </header>
+    
+      <!--================FireBase Authentication==================-->
+      <section class="card">
+        <div class="card-body">
+          <h4 class="card-title">Login</h4>
+          <form>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="text" class="form-control" id="email" name="email" placeholder="username">
+            </div>
+            <div class="form-group">
+              <label for="password">Password<small><a href="#" id="forgot">Forgot password?</a></small></label>
+              <input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="password">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary" type="submit" id="logIn" name="login">Login</button>
+              <button class="btn btn-primary" type="submit" id="signUp" name="signup">Sign Up</button>
+              <button class="btn btn-info" type="submit" id="verifyEmail" name="verify-email">Send Email Verification</button>
+              <button class="btn btn-info" type="submit" id="resetPassword" name="verify-email">Send Password Reset Email</button>
+            </div>
+            <div class="card-footer">
+              <small>Don't have a account? <a href="#">Create One</a></small>
+            </div>
+    
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+
+
+  <!--===============Display Testing Area===================-->
+
+  <div class="quickstart-user-details-container">
+    Firebase sign-in status: <span id="sign-in-status">Unknown</span>
+    <div>Firebase auth <code>currentUser</code> object value:</div>
+    <pre><code id="account-details">null</code></pre>
+  </div>
+
+
+  <!---=================SCRIPT AREA=================-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+     <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBKbmD2C52-tYod9tnoFhtbsVw5bXIpLG0",
+    authDomain: "project-1-50020.firebaseapp.com",
+    databaseURL: "https://project-1-50020.firebaseio.com",
+    projectId: "project-1-50020",
+    storageBucket: "project-1-50020.appspot.com",
+    messagingSenderId: "541022669951",
+    appId: "1:541022669951:web:750dc928c07a8afb"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+  
+  <!--Bootstrap JS-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+
+  <!--Customized JS-->
+  <script type="text/javascript" src="assets/javascript/firebaseTracy.js"></script>
+
+</body>
+
+</html>
