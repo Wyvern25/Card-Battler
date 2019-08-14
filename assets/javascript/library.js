@@ -1,4 +1,4 @@
-	var mainFoods = ['whopper', 'spaghetti', 'mcchicken', 'pizza', 'burrito', 'ramen']
+	var mainFoods = ['whopper', 'salmon nigiri', 'pizza', 'pasta', 'hot dog', 'burrito']
 	var sideFoods = ['fries', 'potatoes', 'salad', 'beans', 'breadsticks', 'chowder']
 	var desserts = ['pie', 'cookie', 'cake', 'donut', 'flan', 'ice cream']
 	var mainfoodItem;
@@ -24,6 +24,11 @@
 		'display': false
 	}]
 
+	// On click, append the photo to the corresponding category
+	// Category 1 - Main food
+	// Category 2 - Side food
+	// Category 3 - Desserts
+
 	$(document).on('click', '.flipper', function() {
 		var cardSelect = $(this).parent().parent().attr("data-column");
 		if (cardSelect === '1') {
@@ -44,20 +49,21 @@
 				var img = $('<img>');
 				img.attr('src', $(this).attr('data-src'))
 				$('.card-2').append(img);	
-				foodObj[cardSelect-1].display	= true		
+				foodObj[cardSelect-1].display = true		
 			}		
 		} else if (cardSelect === '3') {
 			if (foodObj[cardSelect-1].display) {
 				$('.card-3').empty();
-				foodObj[cardSelect-1].display	= false		
+				foodObj[cardSelect-1].display = false		
 			} else {
 				var img = $('<img>');
 				img.attr('src', $(this).attr('data-src'))
 				$('.card-3').append(img);	
-				foodObj[cardSelect-1].display	= true		
+				foodObj[cardSelect-1].display = true		
 			}
 		}
 	})
+
 
 	function mainEntreeStats() {
       for (var i=0; i<mainFoods.length; i++) {
@@ -65,7 +71,7 @@
 
         foodAPI1 = mainfoodItem.split(' ').join('%20')
         var APIkey1 = '52b5ea98265df551a8c942716cdfcbec';
-        var queryURL1 = 'https://api.edamam.com/api/food-database/parser?ingr=' + mainFoods[i] + '&app_id=4cb41cfc&app_key=' + APIkey1;
+        var queryURL1 = 'https://api.edamam.com/api/food-database/parser?ingr=' + foodAPI1 + '&app_id=4cb41cfc&app_key=' + APIkey1;
  
         // console.log(queryURL1)
 
@@ -73,8 +79,8 @@
       $.ajax({
         url: queryURL1,
         method: "GET"
-      }).then(function(response) {
-        mainfoodNutrients = response.hints[0].food.nutrients;
+      }).done(function(response) {
+        mainfoodNutrients = response.hints[2].food.nutrients;
         //console.log('mainfoodnutritents', mainfoodNutrients)
         mainFoodArray.push(mainfoodNutrients)
 
@@ -95,7 +101,7 @@
 
         foodAPI2 = sideFoodItem.split(' ').join('%20')
         var APIkey2 = 'e6e46f2b3d8ad790a36acf6989e22ea1';
-        var queryURL2 = 'https://api.edamam.com/api/food-database/parser?ingr=' + sideFoods[k] + '&app_id=4cb41cfc&app_key=' + APIkey2;
+        var queryURL2 = 'https://api.edamam.com/api/food-database/parser?ingr=' + foodAPI2 + '&app_id=4cb41cfc&app_key=' + APIkey2;
  
         // console.log(queryURL2)
 
@@ -103,8 +109,8 @@
       $.ajax({
         url: queryURL2,
         method: "GET"
-      }).then(function(response) {
-        sideFoodNutrients = response.hints[0].food.nutrients;
+      }).done(function(response) {
+        sideFoodNutrients = response.hints[2].food.nutrients;
         console.log('sidefood', sideFoodNutrients)
         sideFoodArray.push(sideFoodNutrients)
 
@@ -125,7 +131,7 @@
 
         foodAPI3 = dessertItem.split(' ').join('%20')
         var APIkey3 = 'ca199ed290602300fee474300b19a7ed';
-        var queryURL3 = 'https://api.edamam.com/api/food-database/parser?ingr=' + desserts[m] + '&app_id=4cb41cfc&app_key=' + APIkey3;
+        var queryURL3 = 'https://api.edamam.com/api/food-database/parser?ingr=' + foodAPI3 + '&app_id=4cb41cfc&app_key=' + APIkey3;
  
         // console.log(queryURL3)
 
@@ -133,8 +139,8 @@
       $.ajax({
         url: queryURL3,
         method: "GET"
-      }).then(function(response) {
-        dessertNutrients = response.hints[0].food.nutrients;
+      }).done(function(response) {
+        dessertNutrients = response.hints[2].food.nutrients;
         console.log('dessert', dessertNutrients)
         dessertArray.push(dessertNutrients)
 
@@ -149,8 +155,8 @@
       // console.log(dessertArray);
     }    
     mainEntreeStats();
-    sideDishStats();
-    dessertStats();
+    //sideDishStats();
+    //dessertStats();
 
 
 
