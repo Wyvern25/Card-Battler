@@ -290,31 +290,63 @@ $(document).on('click', '#fightOnce', function () {
         }
         console.log('compareA: ' + compareA);
         console.log('compareB: ' + compareB);
+        var percentHPA = [];
+        percentHPA[0] = Math.ceil(compareA[0] / globalHPA[0] * 100);
+        percentHPA[1] = Math.ceil(compareA[1] / globalHPA[1] * 100);
+        percentHPA[2] = Math.ceil(compareA[2] / globalHPA[2] * 100);
+        percentHPA[3] = Math.ceil(compareA[3] / globalHPA[3] * 100);
+        var percentHPB = [];
+        percentHPB[0] = Math.ceil(compareB[0] / globalHPB[0] * 100);
+        percentHPB[1] = Math.ceil(compareB[1] / globalHPB[1] * 100);
+        percentHPB[2] = Math.ceil(compareB[2] / globalHPB[2] * 100);
+        percentHPB[3] = Math.ceil(compareB[3] / globalHPB[3] * 100);
 
-        $('#emeraldCompare').text(Math.ceil(compareA[0] / globalHPA[0] * 100) + '%' + ' (' + globalHPA[0] + ')');
-        $('#rubyCompare').text(Math.ceil(compareA[1] / globalHPA[1] * 100) + '%' + ' (' + globalHPA[1] + ')');
-        $('#diamondCompare').text(Math.ceil(compareA[2] / globalHPA[2] * 100) + '%' + ' (' + globalHPA[2] + ')');
-        $('#sapphireCompare').text(Math.ceil(compareA[3] / globalHPA[3] * 100) + '%' + ' (' + globalHPA[3] + ')');
+        console.log(percentHPA);
+        $('#emeraldCompare').text(percentHPA[0] + '%' + ' (' + globalHPA[0] + ')');
+        $('#rubyCompare').text(percentHPA[1] + '%' + ' (' + globalHPA[1] + ')');
+        $('#diamondCompare').text(percentHPA[2] + '%' + ' (' + globalHPA[2] + ')');
+        $('#sapphireCompare').text(percentHPA[3] + '%' + ' (' + globalHPA[3] + ')');
 
         $('#emeraldCompare2').text(Math.ceil(compareB[0] / globalHPB[0] * 100) + '%' + ' (' + globalHPB[0] + ')');
         $('#rubyCompare2').text(Math.ceil(compareB[1] / globalHPB[1] * 100) + '%' + ' (' + globalHPB[1] + ')');
         $('#diamondCompare2').text(Math.ceil(compareB[2] / globalHPB[2] * 100) + '%' + ' (' + globalHPB[2] + ')');
         $('#sapphireCompare2').text(Math.ceil(compareB[3] / globalHPB[3] * 100) + '%' + ' (' + globalHPB[3] + ')');
-
-
-        if (aScore + bScore + ties == 4) {
-            if (aScore > bScore) {
-                console.log('a wins');
-            } else if (bScore > aScore) {
-                console.log('b wins');
-            } else {
-                console.log('tie');
-            }
-            reset();
+        //
+        for (var i = 0; i < 4; i++) {
+            var elem = document.getElementById("lostA" + (i + 1));
+            var width = percentHPA[i];
+            elem.style.width = (100 - width) + '%';
+            console.log('wid: ' + width);
         }
-
-
+        for (var i = 0; i < 4; i++) {
+            var elem = document.getElementById("lostB" + (i + 1));
+            var width = percentHPB[i];
+            elem.style.width = (100 - width) + '%';
+            console.log('wid: ' + width);
+        }
     }
+
+
+
+
+
+
+
+    //
+    if (aScore + bScore + ties == 4) {
+        if (aScore > bScore) {
+            console.log('a wins');
+        } else if (bScore > aScore) {
+            console.log('b wins');
+        } else {
+            console.log('tie');
+        }
+        //move();
+        reset();
+    }
+
+
+
 })
 
 
@@ -339,9 +371,21 @@ function reset() {
     $('#bWin').text(bScore);
     $('#tie').text(ties);
 }
-    //globalTeamA = [];
-    //globalTeamB = [];
-
-
+//globalTeamA = [];
+//globalTeamB = [];
+//1st bar
+$(document).on('click', '#hpTest', function move() {
+    var elem = document.getElementById("lostA1");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+        } else {
+            width++;
+            elem.style.width = width + '%';
+        }
+    }
+})
 
 

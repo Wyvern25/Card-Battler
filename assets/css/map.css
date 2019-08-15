@@ -1,0 +1,86 @@
+body{
+    background-image:  url('../images/map.png');
+    background-size: 90%;
+    background-repeat: no-repeat;
+}
+div{
+   float:left;
+}
+
+#top3{
+    float:left;
+    width:100%;
+    
+    
+    border: 1px solid red;
+  }
+  
+#russia1{
+    width:36%;
+    border: 1px solid red;
+} 
+ #russia{
+    margin-left:37%;
+    margin-top:27%;
+} 
+ 
+#europe1{
+    float:left;
+    width:32%;
+    
+    border: 1px solid red;
+
+} 
+#europe{
+    margin-left:68%;
+    margin-top:45%;
+
+} 
+#usa1{
+    float:left;
+    width:20%;
+    border: 1px solid red;
+} 
+
+ 
+#usa{
+    margin-left:64%;
+    margin-top:89%;
+
+} 
+#africa1{
+    border: 1px solid red;
+    width: 100%;
+}  
+#africa{
+    margin-left:49%;
+    margin-top:5%;
+
+}
+#stats {
+    width:23%;
+    border: 1px solid red;
+}
+#bottom2{
+    width:75%;
+}
+#brazil1{
+    float: left;
+    border: 1px solid red;
+    width: 27%;
+}  
+#brazil{
+    margin-left:29%;
+    margin-top:20%;
+
+}
+#australia1{
+    float: left;
+    border: 1px solid red;
+    width: 48%;
+}  
+#australia{
+    margin-left: 85%;
+    margin-top: 22%;
+
+}

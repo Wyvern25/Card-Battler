@@ -3,7 +3,8 @@ $(function (){
 
 //==================SIGN UP=====================//
   $("#signUp").on("click", function(){
-    var email = $("#email").val();
+    var emailUser = $("#email").val();
+    var email = emailUser + "@gmail.com";
     var password = $("#password").val();
     
     if (email.length < 4) {
@@ -46,7 +47,8 @@ $(function (){
     if (firebase.auth().currentUser) { //currentUser: current authentication state of the web is signed in
       firebase.auth().signOut(); //then sign the user out
     } else {
-      var email = $("#email").val();
+      var emailUser = $("#email").val();
+      var email = emailUser + "@gmail.com"
       var password = $("#password").val();
       if (email.length < 4) {
         alert('Please enter an email address.');
@@ -73,6 +75,24 @@ $(function (){
       });
     $(this).prop("disabled", true) //disable logIn function after firebase approves user authentication
     }
+  })
+
+  $(".createAccount").on("click",function() {
+    $(".card-title").text("Create An Account");
+    $("#logIn").hide();
+    $("#signUp").show();
+    $(".logInPage").show();
+    $(".signUpPage").hide();
+    $("#forgot").hide();
+  })
+
+  $(".logInLink").on("click",function(){
+    $(".card-title").text("Create An Account");
+    $("#logIn").show();
+    $("#signUp").hide();
+    $(".logInPage").hide();
+    $(".signUpPage").show();
+    $("#forgot").show();
   })
 
   $("#resetPassword").on("click", function() {
@@ -143,6 +163,9 @@ $(function (){
 
   window.onload = function() {
     authStateMonitor();
+    $(".logInPage").hide();
+    $("#signUp").hide();
+    $("#resetPassword").hide();
   };
 
 });
