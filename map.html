@@ -2,68 +2,68 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Food Fighter Map</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/map.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!--Link Bootstrap 4-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    #map {
+      width: 100%;
+      height: 400px;
+      background-color: grey;
+    }
+  </style>
 </head>
 
 <body>
-    <div id='top3'>
-        <div id='usa1'>
-            <button id='usa'>U</button>
+  <div class="container">
+
+    <div class="row justify-content-center">
+      <div class="col-md-10 mb-4 text-center">
+        <div class="card">
+          <section class="card-header"><h3>Food Fighter Map</h3></section>
+          <!--The div element for the map -->
+          <section class="card-body">
+            <div id="map"></div>
+          </section>
         </div>
-        <div id='europe1'>
-            <button id='europe'>E</button>
-        </div>
-        <div id='russia1'>
-            <button id='russia'>R</button>
-        </div>
+      </div>
     </div>
+  </div>
 
-    <div id='africa1'>
-        <button id='africa'>A</button>
-    </div>
-    <div id='stats'>
-        <p>Stage:
-            <span id='slot'>??</span>
-        </p>
-        <p>Temp:
-            <span id='temp'>??</span>
-        </p>
-
-        <p>Wind Speed:
-            <span id='wind'>??</span>
-        </p>
-        <p>Humidity:
-            <span id='humidity'>??</span>
-        </p>
-        <p>card slot:
-            <span id='slot'>??</span>
-        </p>
-        <p>stat:
-            <span id='stat'>??</span>
-        </p>
-        <p>% modifier:
-            <span id='percent'>??</span>
-        </p>
-    </div>
-    <div id='bottom2'>
-        <div id='brazil1'>
-            <button id='brazil'>B</button>
-        </div>
-        <div id='australia1'>
-            <button id='australia'>AU</button>
-        </div>
-
-    </div>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="assets/javascript/map.js"></script>
+  <!---=============SCRIPT=========-//-->
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-database.js"></script>
+  <script>
+    /**
+     * Firebase config block.
+     */
+    var config = {
+      apiKey: "AIzaSyBKbmD2C52-tYod9tnoFhtbsVw5bXIpLG0",
+      authDomain: "project-1-50020.firebaseapp.com",
+      databaseURL: "https://project-1-50020.firebaseio.com",
+      projectId: "project-1-50020",
+      storageBucket: "project-1-50020.appspot.com",
+      messagingSenderId: "541022669951",
+      appId: "1:541022669951:web:750dc928c07a8afb"
+    };
+    
+    firebase.initializeApp(config);
+  </script>    
+  <script type="text/javascript" src="assets/javascript/map.js"></script>
+  
+  <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKbmD2C52-tYod9tnoFhtbsVw5bXIpLG0
+    &libraries=visualization&callback=initMap">
+  </script>
 </body>
 
 </html>
