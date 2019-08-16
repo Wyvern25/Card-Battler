@@ -14,81 +14,80 @@
 <body>
     <h1>Placeholder Title: Food Fighter</h1>
 
-    <div id='Debug Buttons'>
+    <!-- <div id='Debug Buttons'>
         <button id="allGemSpawn">All gem Spawn</button>
         <button id="teamAAll">Team A gems</button>
         <button id="teamBAll">Team B gems</button>
-        <button id="fightOnce">Fight Once</button>
-        <button id="hpTest">HP</button>
-    </div>
+
+
+    </div> -->
     <br>
 
 
 
-
-    <p id='teamNames'>Placeholder: Team A</p>
-    <br>
-    </div>
-
-    <div id='battleWrapper'>
-        <div>
-            <span id='emeraldStatsA'>Atk/HP</span>
-            <span id='rubyStatsA'>Atk/HP</span>
-            <span id='diamondStatsA'>Atk/HP</span>
-            <span id='sapphireStatsA'>Atk/HP</span>
-        </div>
-
-        <div>
-            <span id='emeraldValue'></span>
-            <span id='rubyValue'></span>
-            <span id='diamondValue'></span>
-            <span id='sapphireValue'></span>
-        </div>
-
-        <div id='cardA1'>
-            <img id='emerald' src="assets/images/emerald.png" hiddenv="">
-        </div>
-        <div id='cardA2'>
-            <img id='ruby' src="assets/images/ruby.png" hiddenv="">
-        </div>
-        <div id='cardA3'>
-            <img id='diamond' src="assets/images/diamond.png" hiddenv="">
-        </div>
-        <div id='cardA4'>
-            <img id='sapphire' src="assets/images/sapphire.png" hiddenv="">
-        </div>
+    <div id='container'>
 
 
-        <div id='clearFloat'></div>
-
-        <br>
-
-        <div id='lifeA1'>
-            <div id='lostA1'></div>
-        </div>
-        <div id='lifeA2'>
-            <div id='lostA2'></div>
-        </div>
-        <div id='lifeA3'>
-            <div id='lostA3'></div>
-        </div>
-        <div id='lifeA4'>
-            <div id='lostA4'></div>
-        </div>
-
-    </div>
-    <div id="instructions">
-        <p>Cards will spawn with random values for now. Cards will fight against the card directly above or below
-            themselves</p>
-        <p>Console will display w/l/t after both Team A and B have new sets of values</p>
-    </div>
-    <div>
-
-        <div id='clearFloat'></div>
-        <br>
-        <br>
 
         <div id='battleWrapper'>
+            <br>
+            <p id='teamNames'>User Team</p>
+            <br>
+            <div>
+                <span id='foodStats'>Atk / Def / Cri% / HP</span>
+                <span id='foodStats'>Atk / Def / Cri% / HP</span>
+                <span id='foodStats'>Atk / Def / Cri% / HP</span>
+            </div>
+
+            <div>
+                <span id='foodA1Value'></span>
+                <span id='foodA2Value'></span>
+                <span id='foodA3Value'></span>
+            </div>
+
+            <div id='cardA1'>
+                <img id='foodA1' src="assets/images/emerald.png" hiddenv="">
+            </div>
+            <div id='cardA2'>
+                <img id='foodA2' src="assets/images/ruby.png" hiddenv="">
+            </div>
+            <div id='cardA3'>
+                <img id='foodA3' src="assets/images/diamond.png" hiddenv="">
+            </div>
+
+
+
+            <div id='clearFloat'></div>
+
+            <br>
+
+            <div id='lifeA1'>
+                <div id='lostA1'></div>
+            </div>
+            <div id='lifeA2'>
+                <div id='lostA2'></div>
+            </div>
+            <div id='lifeA3'>
+                <div id='lostA3'></div>
+            </div>
+
+
+
+            <div id='clearFloat'></div>
+            <br>
+
+            <button id="battle">Battle</button>
+            <!-- <button id="weather">Weather</button> -->
+            <br>
+            <span> Stage Effects: Card / Stat / %Mod</span>
+            <p>
+                <span id='stageEffects'>
+            </p>
+            </span>
+            <br>
+
+
+
 
             <div id='lifeOfB'>
                 <div id='lifeA1'>
@@ -103,72 +102,67 @@
                     <div id='lostB3'></div>
                 </div>
 
-                <div id='lifeA4'>
-                    <div id='lostB4'></div>
-                </div>
+
             </div>
             <div id='clearFloat'></div>
             <br>
             <div id='cardB1'>
-                <img id='emerald2' src="assets/images/emerald.png" hiddenv="">
+                <img id='foodB1' src="assets/images/emerald.png" hiddenv="">
             </div>
             <div id='cardB2'>
-                <img id='ruby2' src="assets/images/ruby.png" hiddenv="">
+                <img id='foodB2' src="assets/images/ruby.png" hiddenv="">
             </div>
             <div id='cardB3'>
-                <img id='diamond2' src="assets/images/diamond.png" hiddenv="">
+                <img id='foodB3' src="assets/images/diamond.png" hiddenv="">
             </div>
-            <div id='cardB4'>
-                <img id='sapphire2' src="assets/images/sapphire.png" hiddenv="">
-            </div>
+
 
 
             <div>
-                <span id='emeraldStatsB'>Atk/HP</span>
-                <span id='rubyStatsB'>Atk/HP</span>
-                <span id='diamondStatsB'>Atk/HP</span>
-                <span id='sapphireStatsB'>Atk/HP</span>
+                <span id='foodStats'>Atk / Def / Cri% / HP</span>
+                <span id='foodStats'>Atk / Def / Cri% / HP</span>
+                <span id='foodStats'>Atk / Def / Cri% / HP</span>
             </div>
 
 
 
             <div id='scoreGems2'>
-                <span id='emeraldValue2'></span>
-                <span id='rubyValue2'></span>
-                <span id='diamondValue2'></span>
-                <span id='sapphireValue2'></span>
+                <span id='foodB1Value'></span>
+                <span id='foodB2Value'></span>
+                <span id='foodB3Value'></span>
             </div>
             <div id='clearFloat'></div>
-            <br>
 
-
-            <p>Remaining life, A, B</p>
-            <div id='scoreCompare'>
-                <span id='emeraldCompare'>?</span>
-                <span id='rubyCompare'>?</span>
-                <span id='diamondCompare'>?</span>
-                <span id='sapphireCompare'>?</span>
-            </div>
-
-            <br>
-            <br>
-            <div id='scoreCompare2'>
-                <span id='emeraldCompare2'>?</span>
-                <span id='rubyCompare2'>?</span>
-                <span id='diamondCompare2'>?</span>
-                <span id='sapphireCompare2'>?</span>
-            </div>
+            <p id='teamNames'>Computer Team</p>
         </div>
+        <!-- <p>Remaining life, A, B</p>
+                <div id='scoreCompare'>
+                    <span id='foodA1Compare'>?</span>
+                    <span id='foodA2Compare'>?</span>
+                    <span id='foodA3Compare'>?</span>
+                </div>
+
+                <br>
+                <br>
+                <div id='scoreCompare2'>
+                    <span id='foodB1Compare'>?</span>
+                    <span id='foodB2Compare'>?</span>
+                    <span id='foodB3Compare'>?</span>
+                </div>
+            </div> -->
+
+
         <div id="winLoss">
-            <p>Team A Wins: <span id='aWin'></span></p>
-            <p>Team B Wins: <span id='bWin'></span></p>
+            <p>User Wins: <span id='aWin'></span></p>
+            <p>Computer Wins: <span id='bWin'></span></p>
             <p>Ties: <span id='tie'></span></p>
+            <p>Plays: <span id='play'></span></p>
         </div>
+    </div>
 
 
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="assets/javascript/gameDave.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/gameDave.js"></script>
 
 
 
