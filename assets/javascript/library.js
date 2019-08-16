@@ -2,11 +2,11 @@
 //Array of objects to hold the search term and image
 
 
-// Dave 
+// Arrays for Dave  
 // mainFoods
 // sideFoods
 // desserts
-// myThreeFoods
+// myThreeFoods - this contains the names of the 3 foods user selects 
 
 
 var mainFoods = [
@@ -90,101 +90,96 @@ var desserts = [
 	}
 ]
 
-//A
+//Object for the 3 selections on top. On click, obj will toggle between true/false so only one image is appended 
 var foodObj = [
-{
-	display: false,
-	source: null
-}, 
-{
-	display: false,
-	source: null
-}, 
-{
-	display: false,
-	source: null
-}]
+	{
+		display: false,
+		source: null
+	},
+	{
+		display: false,
+		source: null
+	},
+	{
+		display: false,
+		source: null
+	}]
 
-
+//Functions for each category - this is when API is called 
 mainEntreeStats();
 sideDishStats();
 dessertStats();
+
 var myThreeFoods = ['', '', ''];
 
 //On click, append the image to the corresponding category 
-$(document).on('click', '.flipper', function() {
+$(document).on('click', '.flipper', function () {
 
 	var source = $(this).attr("source")
+	//This selects the whole column (all 6) - so each category goes to the correct button on top
 	var cardSelect = $(this).parent().parent().attr("data-column");
 	if (cardSelect === '1') {
-		if (foodObj[cardSelect-1].display) {
-			if (foodObj[cardSelect-1].source !== source) {
+		if (foodObj[cardSelect - 1].display) {
+			if (foodObj[cardSelect - 1].source !== source) {
 				$('.card-1 img').attr('src', $(this).attr('imgFile'))
 				myThreeFoods[0] = $(this).attr('searchWord');
-				console.log('my3', myThreeFoods)
-				foodObj[cardSelect-1].source = source
-			} 
+				foodObj[cardSelect - 1].source = source
+			}
 		} else {
 			var img = $('<img>');
 			img.attr('src', $(this).attr('imgFile'))
-			$('.card-1').append(img);	
-			foodObj[cardSelect-1].display = true
-			foodObj[cardSelect-1].source = source
-
+			$('.card-1').append(img);
+			foodObj[cardSelect - 1].display = true
+			foodObj[cardSelect - 1].source = source
+			//update myThreeFoods array 
 			myThreeFoods[0] = $(this).attr('searchWord');
-			console.log('my3', myThreeFoods)
 		}
 	} else if (cardSelect === '2') {
-		if (foodObj[cardSelect-1].display) {
-			if (foodObj[cardSelect-1].source !== source) {
+		if (foodObj[cardSelect - 1].display) {
+			if (foodObj[cardSelect - 1].source !== source) {
 				$('.card-2 img').attr('src', $(this).attr('imgFile'))
 				myThreeFoods[1] = $(this).attr('searchWord');
-				console.log('my3', myThreeFoods)
-
-				foodObj[cardSelect-1].source = source
-			} 
+				foodObj[cardSelect - 1].source = source
+			}
 		} else {
 			var img = $('<img>');
 			img.attr('src', $(this).attr('imgFile'))
-			$('.card-2').append(img);	
-			foodObj[cardSelect-1].display = true
-			foodObj[cardSelect-1].source = source
+			$('.card-2').append(img);
+			foodObj[cardSelect - 1].display = true
+			foodObj[cardSelect - 1].source = source
 			myThreeFoods[1] = $(this).attr('searchWord');
 		}
 	} else if (cardSelect === '3') {
-		if (foodObj[cardSelect-1].display) {
-			if (foodObj[cardSelect-1].source !== source) {
+		if (foodObj[cardSelect - 1].display) {
+			if (foodObj[cardSelect - 1].source !== source) {
 				$('.card-3 img').attr('src', $(this).attr('imgFile'))
 				myThreeFoods[2] = $(this).attr('searchWord');
-				console.log('my3', myThreeFoods)
-				foodObj[cardSelect-1].source = source
-			} 
+				foodObj[cardSelect - 1].source = source
+			}
 		} else {
 			var img = $('<img>');
 			img.attr('src', $(this).attr('imgFile'))
-			$('.card-3').append(img);	
-			foodObj[cardSelect-1].display = true
-			foodObj[cardSelect-1].source = source
+			$('.card-3').append(img);
+			foodObj[cardSelect - 1].display = true
+			foodObj[cardSelect - 1].source = source
 			myThreeFoods[2] = $(this).attr('searchWord');
 		}
 	}
-	console.log()
 })
 
 function mainEntreeStats() {
 	//For each object in mainFoods array
-	$.each(mainFoods, function(index){ 
+	$.each(mainFoods, function (index) {
 		var mainFoodNutrients;
 
 		//store searchTerm and displayImg in attr to use later --> so they're always together
 		var entreeItem = $("<div>").addClass("flipper").attr({
 			"searchWord": this.searchTerm,
 			"imgFile": this.displayImg,
-			"source":  index
+			"source": index
 		});
 
 		$(".main-entree").append(entreeItem);
-		console.log('hee', entreeItem)
 
 		var APIkey1 = '937a0db4501c979acd6238b0d2944f3f';
 		var mainFood = this.searchTerm.split(' ').join('%20');
@@ -195,7 +190,6 @@ function mainEntreeStats() {
 			method: "GET"
 		}).done(function (response) {
 			mainFoodNutrients = response.hints[0].food.nutrients;
-			console.log(mainFoodNutrients);
 
 			//create div to store the nutrients
 			var backInfo = $("<div>").addClass("back").append([
@@ -205,13 +199,14 @@ function mainEntreeStats() {
 				$("<p>").text("Carbs: " + Math.ceil(mainFoodNutrients.CHOCDF))
 			]);
 
+			//adding the nutrient info to the mainFoods array 
 			mainFoods[index].Calories = Math.ceil(mainFoodNutrients.ENERC_KCAL)
 			mainFoods[index].Protein = Math.ceil(mainFoodNutrients.PROCNT)
 			mainFoods[index].Fat = Math.ceil(mainFoodNutrients.FAT)
 			mainFoods[index].Carbs = Math.ceil(mainFoodNutrients.CHOCDF)
-			console.log('sdsd', mainFoods)
+
 			var imgSRC = entreeItem.attr("imgFile");//pull 	attr that we stored earlier
-			var frontImg = $("<img>").attr("src",imgSRC).addClass("front");
+			var frontImg = $("<img>").attr("src", imgSRC).addClass("front");
 
 			//add picture and nutrients info to entreeItem
 			entreeItem.append(frontImg);
@@ -219,22 +214,21 @@ function mainEntreeStats() {
 		})
 
 	})
-}	
+}
 
 function sideDishStats() {
 	//For each object in mainFoods array
-	$.each(sideFoods, function(index){ 
+	$.each(sideFoods, function (index) {
 		var sideFoodNutrients;
 
 		//store searchTerm and displayImg in attr to use later --> so they're always together
 		var sideItem = $("<div>").addClass("flipper").attr({
 			"searchWord": this.searchTerm,
-			"imgFile": this.displayImg, 
-			"source":  index
+			"imgFile": this.displayImg,
+			"source": index
 		});
 
 		$(".side-dish").append(sideItem);
-		console.log('sideItem', sideItem)
 
 		var APIkey2 = '9e3689f29fe4c6c1734056093c70c321';
 		var sideFood = this.searchTerm.split(' ').join('%20');
@@ -245,7 +239,6 @@ function sideDishStats() {
 			method: "GET"
 		}).done(function (response) {
 			sideFoodNutrients = response.hints[0].food.nutrients;
-			console.log('sF',sideFoodNutrients);
 
 			var backInfo = $("<div>").addClass("back").append([
 				$("<p>").text("Calories: " + Math.ceil(sideFoodNutrients.ENERC_KCAL)),
@@ -260,29 +253,28 @@ function sideDishStats() {
 			sideFoods[index].Carbs = Math.ceil(sideFoodNutrients.CHOCDF)
 
 			var imgSRC = sideItem.attr("imgFile"); //pull attr that we stored earlier
-			var frontImg = $("<img>").attr("src",imgSRC).addClass("front");
-			
+			var frontImg = $("<img>").attr("src", imgSRC).addClass("front");
+
 			sideItem.append(frontImg);
 			sideItem.append(backInfo);
 		})
 
 	})
-}		
+}
 
 function dessertStats() {
 	//For each object in desserts array
-	$.each(desserts, function(index){ 
+	$.each(desserts, function (index) {
 		var dessertNutrients;
 
 		//store searchTerm and displayImg in attr to use later --> so they're always together
 		var dessertItem = $("<div>").addClass("flipper").attr({
 			"searchWord": this.searchTerm,
 			"imgFile": this.displayImg,
-			"source":  index			 
+			"source": index
 		});
 
 		$(".dessert").append(dessertItem);
-		console.log('dessertItem', dessertItem)
 
 		var APIkey3 = 'bd8398262899eee9c356a37a4505df49';
 		var dessertType = this.searchTerm.split(' ').join('%20');
@@ -293,7 +285,6 @@ function dessertStats() {
 			method: "GET"
 		}).done(function (response) {
 			dessertNutrients = response.hints[0].food.nutrients;
-			console.log('dessertNutri', dessertNutrients);
 
 			var backInfo = $("<div>").addClass("back").append([
 				$("<p>").text("Calories: " + Math.ceil(dessertNutrients.ENERC_KCAL)),
@@ -309,14 +300,14 @@ function dessertStats() {
 
 
 			var imgSRC = dessertItem.attr("imgFile");//pull attr that we stored earlier
-			var frontImg = $("<img>").attr("src",imgSRC).addClass("front");
+			var frontImg = $("<img>").attr("src", imgSRC).addClass("front");
 
 			dessertItem.append(frontImg);
 			dessertItem.append(backInfo);
 		})
 
 	})
-}		
+}
 
 
 

@@ -1,13 +1,27 @@
-var foodCard0 = ["assets/images/burger.png", 'assets/images/sushi.png', 'assets/images/pizza.png', 'assets/images/pasta.png', 'assets/images/hot-dog.png', 'assets/images/taco.png',];
-var foodCard1 = ["assets/images/nachos.png", 'assets/images/fries.png', 'assets/images/salad.png', 'assets/images/fruit.png', 'assets/images/soup.png', 'assets/images/rice.png',];
-var foodCard2 = ["assets/images/donut.png", 'assets/images/ice-cream.png', 'assets/images/cookie.png', 'assets/images/cake.png', 'assets/images/pie.png', 'assets/images/sno-cone.png',];
-//tracy & dave save variable
-//var userFood[foodObj1.Name, foodObj2.Name, foodObj3.Name]; 
+var playerCards = [];
+var foodCard0 = mainFoods;
+var foodCard1 = sideFoods;
+var foodCard2 = desserts;
+//tracy & dave save variable 
+//tracy dynamic these to db please
+var userWins = 0;
+var computerWins = 0;
+var globalTies = 0;
+var globalPlays = 0;
+// if you have time to link back to steve's 
+//var userFood[foodObj1.Name, foodObj2.Name, foodObj3.Name];
+
+/************** */
+// whopper carb + 20
+// hot dog carb + 40
+/************** */
+
 var weatherRandomizer = {
     Name: '??',
     Card: 1, //1-3
     Stat: 2, //1-4
     Value: .75, //75-1.25
+    stageSelect: 1, //dont know if she finishes, for now background color changes
     modColor:
         function () {
             if (this.Value < 1) {
@@ -18,139 +32,10 @@ var weatherRandomizer = {
         }
 }
 //
-var foodObj1 = [
-    {
-        Name: "burger",
-        imageSource: "assets/images/burger.png",
-        KCal: 268,
-        Fat: 12.28,
-        Fiber: 2.2,
-        Protein: 10.36
-    },
-
-    {
-        Name: "sushi",
-        imageSource: "assets/images/sushi.png",
-        KCal: 371,
-        Fat: 1.51,
-        Fiber: 3.2,
-        Protein: 13.04
-    },
-
-    {
-        Name: "pizza",
-        imageSource: "assets/images/pizza.png",
-        KCal: 273,
-        Fat: 13.21,
-        Fiber: 1.3,
-        Protein: 10.43
-    },
-
-    {   //no fiber value; fiber can be def or crit
-        Name: "pasta",
-        imageSource: "assets/images/pizza.png",
-        KCal: 206,
-        Fat: 6.22,
-        Fiber: 0,
-        Protein: 6.48
-    },
-
-    {
-        Name: "hot-dog",
-        imageSource: "assets/images/hot-dog.png",
-        KCal: 250,
-        Fat: 15.33,
-        Fiber: 1,
-        Protein: 11.19
-    },
-
-    {
-        Name: "taco",
-        imageSource: "assets/images/taco.png",
-        KCal: 440,
-        Fat: 17.59,
-        Fiber: 2.9,
-        Protein: 10.17
-    }
-];
 
 
 
-//
-/*
-nacho
-ENERC_KCAL: 185.78191562913727
-FAT: 13.255193476275211
-FIBTG: 1.301153110896876
-PROCNT: 1.9075888168403532
- 
-fries
-ENERC_KCAL: 77
-FAT: 0.09
-FIBTG: 2.2
-PROCNT: 2.02
- 
-salad
-ENERC_KCAL: 91
-FAT: 5.46
-FIBTG: 0.91
-PROCNT: 3.25
- 
-fruit
-ENERC_KCAL: 31
-FAT: 0.22
-FIBTG: 2.7
-PROCNT: 1.83
- 
-soup
-ENERC_KCAL: 412
-FAT: 9.5
-FIBTG: 3
-PROCNT: 12
- 
-rice
-ENERC_KCAL: 37
-FAT: 0.4099999964237213
-FIBTG: 0.4000000059604645
-PROCNT: 0.4099999964237213
- 
-//
-donut
-ENERC_KCAL: 218
-FAT: 9.239999771118164
-FIBTG: 0.800000011920929
-PROCNT: 1.6799999475479126
- 
-ice cream
-ENERC_KCAL: 423
-FAT: 22.08
-PROCNT: 5.25
-//no fiber
- 
-cookie
-ENERC_KCAL: 364.4976068123309
-FAT: 17.636980974790205
-FIBTG: 1.1757987316526803
-PROCNT: 4.703194926610721
- 
-cake
-ENERC_KCAL: 145
-FAT: 4.03
-PROCNT: 4.53
-//no fiber
- 
-pie
-ENERC_KCAL: 207
-FAT: 11
-FIBTG: 0.7
-PROCNT: 3.5
- 
-sno cone
-ENERC_KCAL: 426
-FAT: 22.9
-FIBTG: 1.5
-PROCNT: 5.2
-*/
+allB();
 
 
 
@@ -167,11 +52,7 @@ var globalAtkB = [];
 var globalDefB = [];
 var globalCriB = [];
 
-//tracy dynamic these to db please
-var userWins = 0;
-var computerWins = 0;
-var globalTies = 0;
-var globalPlays = 0;
+
 
 
 
@@ -198,6 +79,12 @@ $(document).on('click', '#teamBAll', function () {
     allB();
 })
 */
+function userCardRandomizer() {
+    var i = Math.floor(Math.random() * 6);
+    playerCards.push(foodCard0[i].searchTerm, foodCard1[i].searchTerm, foodCard2[i].searchTerm);
+
+}
+
 function allA() {
     $('#foodA1Value').text("");
     $('#foodA2Value').text("");
@@ -208,33 +95,30 @@ function allA() {
     teamA3 = [];
     teamA4 = [];
 
-    while (teamA2.length < 3) {
-        var z = Math.floor(Math.random() * 6);
-        //image swap will replace w/ firebase
-        var swap = foodObj1[z].imageSource;
-        imageSwap.push(swap);
+    var z = Math.floor(Math.random() * 6);
 
-        //generates 1st stat, hp from KCal
-        var statOne = foodObj1[z].KCal;
+    //image swap will replace w/ firebase
 
-        teamA.push(statOne);
-        globalHPA.push(statOne);
+    imageSwap.push(foodCard0[z].displayImg, foodCard1[z].displayImg, foodCard2[z].displayImg);
 
-        //generates 2nd stat, atk from Protein
-        var statTwo = foodObj1[z].Protein;
-        teamA2.push(statTwo);
-        globalAtkA.push(statTwo);
+    //generates 1st stat, hp from KCal
+    teamA.push(foodCard0[z].Calories, foodCard1[z].Calories, foodCard2[z].Calories);
+    globalHPA = teamA;
 
-        //generates 3rd stat, def from fiber
-        var statThree = foodObj1[z].Fiber;
-        teamA3.push(statThree);
-        globalDefA.push(statThree);
+    //generates 2nd stat, atk from Carbs
+    teamA2.push(foodCard0[z].Carbs, foodCard1[z].Carbs, foodCard2[z].Carbs);
+    globalAtkA = teamA2;
 
-        //generates 3rd stat, def from fiber
-        var statFour = foodObj1[z].Fat;
-        teamA4.push(statFour);
-        globalCriA.push(statFour);
-    }
+    //generates 3rd stat, def from Protein
+    teamA3.push(foodCard0[z].Protein, foodCard1[z].Protein, foodCard2[z].Protein);
+    globalDefA = teamA3;
+
+
+    //generates 4th stat, cri from fat
+    teamA4.push(foodCard0[z].Fat, foodCard1[z].Fat, foodCard2[z].Fat);
+    globalCriA = teamA4;
+
+
 
     $('#foodA1').attr('src', imageSwap[0]);
     $('#foodA2').attr('src', imageSwap[1]);
@@ -252,38 +136,29 @@ function allB() {
     teamB3 = [];
     teamB4 = [];
 
-    while (teamB2.length < 3) {
+    var z = Math.floor(Math.random() * 6);
 
-        var z = Math.floor(Math.random() * 6);
-        //image swap for random opponents
-        var swap = foodObj1[z].imageSource;
-        imageSwap.push(swap);
+    //image swap will replace w/ firebase
 
-        //generates 1st stat, hp from KCal
-        var statOne = foodObj1[z].KCal;
-        teamB.push(statOne);
-        // disable above 
-        //teamB.push(foodObj1[z].KCal, foodObj2[z].KCal, foodObj3[z].KCal) 
-        globalHPB.push(statOne);
+    imageSwap.push(foodCard0[z].displayImg, foodCard1[z].displayImg, foodCard2[z].displayImg);
 
-        //generates 2nd stat, atk from Protein
-        var statTwo = foodObj1[z].Protein;
-        teamB2.push(statTwo);
-        // disable above 
-        //teamB.push(foodObj1[z].Protein, foodObj2[z].Protein, foodObj3[z].Protein)
-        globalAtkB.push(statTwo);
+    //generates 1st stat, hp from KCal
+    teamB.push(foodCard0[z].Calories, foodCard1[z].Calories, foodCard2[z].Calories);
+    globalHPB = teamB;
 
-        //generates 3rd stat, def from fiber
-        var statThree = foodObj1[z].Fiber;
-        teamB3.push(statThree);
-        globalDefB.push(statThree);
+    //generates 2nd stat, atk from Carbs
+    teamB2.push(foodCard0[z].Carbs, foodCard1[z].Carbs, foodCard2[z].Carbs);
+    globalAtkB = teamB2;
 
-        //generates 3rd stat, def from fiber
-        var statFour = foodObj1[z].Fat;
-        teamB4.push(statFour);
-        globalCriB.push(statFour);
+    //generates 3rd stat, def from Protein
+    teamB3.push(foodCard0[z].Protein, foodCard1[z].Protein, foodCard2[z].Protein);
+    globalDefB = teamB3;
 
-    }
+
+    //generates 4th stat, cri from fat
+    teamB4.push(foodCard0[z].Fat, foodCard1[z].Fat, foodCard2[z].Fat);
+    globalCriB = teamB4;
+
 
     $('#foodB1').attr('src', imageSwap[0]);
     $('#foodB2').attr('src', imageSwap[1]);
@@ -306,9 +181,10 @@ function wRandom() {
     weatherRandomizer.Card = Math.ceil(Math.random() * 3);
     weatherRandomizer.Stat = Math.ceil(Math.random() * 4);
     weatherRandomizer.Value = Math.ceil(Math.random() * 51 + 74) / 100;
+    weatherRandomizer.stageSelect = Math.ceil(Math.random() * 4);
     wcolor = weatherRandomizer.modColor();
 
-    $('#stageEffects').text(weatherRandomizer.Card + ' / ' + weatherRandomizer.Stat + ' / ' + weatherRandomizer.Value + ' / ' + wcolor);
+    $('#stageEffects').text(weatherRandomizer.Card + ' / ' + weatherRandomizer.Stat + ' / ' + weatherRandomizer.Value);/* + ' / ' + wcolor);*/
     /*weatherRandomizer.modColor();
     console.log(weatherRandomizer.Card);
     console.log(weatherRandomizer.Stat);
@@ -347,10 +223,10 @@ function weatherToGlobal() {
         statName = 'cri';
     }
 
-    console.log('card ' + i);
-    console.log('stat ' + statName);
+    //console.log('card ' + i);
+    //console.log('stat ' + statName);
 
-    console.log(globalHPA[i - 1]);
+    //console.log(globalHPA[i - 1]);
 
     $('#foodA1Value').text(globalAtkA[0] + " / " + globalDefA[0] + " / " + globalCriA[0] + " / " + globalHPA[0]);
     $('#foodA2Value').text(globalAtkA[1] + " / " + globalDefA[1] + " / " + globalCriA[1] + " / " + globalHPA[1]);
@@ -385,22 +261,32 @@ var weatherRandomizer = {
         }
 }
 */
-
-
+stager();
+function stager() {
+    wRandom();
+    if (weatherRandomizer.stageSelect == 1) {
+        document.body.style.background = 'red';
+    } else if (weatherRandomizer.stageSelect == 2) {
+        document.body.style.background = 'green';
+    } else if (weatherRandomizer.stageSelect == 3) {
+        document.body.style.background = 'blue';
+    } else { document.body.style.background = 'purple'; }
+}
 
 $(document).on('click', '#battle', function move() {
     allA();
     allB();
     wRandom();
     weatherToGlobal();
+    var timer = 125;
     if ((globalHPA.length >= 3) && (globalHPB.length >= 3) && (battleToggle == true)) {
         battleToggle = false;
         var hpScore = [];
-
+        stager();
         var elem = document.getElementById('lostA1');
         var width = 100 / (globalHPA[0] / (globalAtkB[0] - globalDefA[0]));
         var wide = 0;
-        var id = setInterval(frame, 50);
+        var id = setInterval(frame, timer);
         function frame() {
             if ((wide >= 100) || (wideb >= 100)) {
                 clearInterval(id);
@@ -417,7 +303,7 @@ $(document).on('click', '#battle', function move() {
         var elemb = document.getElementById('lostB1');
         var widthb = 100 / (globalHPB[0] / (globalAtkA[0] - globalDefB[0]));
         var wideb = 0;
-        var idb = setInterval(frameb, 50);
+        var idb = setInterval(frameb, timer);
         function frameb() {
             if ((wideb >= 100) || (wide >= 100)) {
                 clearInterval(idb);
@@ -432,7 +318,7 @@ $(document).on('click', '#battle', function move() {
 
         var elem1 = document.getElementById('lostA2');
         var width1 = 100 / (globalHPA[1] / (globalAtkB[1] - globalDefA[1]));
-        var id1 = setInterval(frame1, 50);
+        var id1 = setInterval(frame1, timer);
         var wide1 = 0;
         function frame1() {
             if ((wide1 >= 100) || (wideb1 >= 100)) {
@@ -450,7 +336,7 @@ $(document).on('click', '#battle', function move() {
         var elemb1 = document.getElementById('lostB2');
         var widthb1 = 100 / (globalHPB[1] / (globalAtkA[1] - globalDefB[1]));
         var wideb1 = 0;
-        var idb1 = setInterval(frameb1, 50);
+        var idb1 = setInterval(frameb1, timer);
         function frameb1() {
             if ((wideb1 >= 100) || (wide1 >= 100)) {
                 clearInterval(idb1);
@@ -466,7 +352,7 @@ $(document).on('click', '#battle', function move() {
 
         var elem2 = document.getElementById('lostA3');
         var width2 = 100 / (globalHPA[2] / (globalAtkB[2] - globalDefA[2]));
-        var id2 = setInterval(frame2, 50);
+        var id2 = setInterval(frame2, timer);
         var wide2 = 0;
         function frame2() {
             if ((wide2 >= 100) || (wideb2 >= 100)) {
@@ -484,7 +370,7 @@ $(document).on('click', '#battle', function move() {
         var elemb2 = document.getElementById('lostB3');
         var widthb2 = 100 / (globalHPB[2] / (globalAtkA[2] - globalDefB[2]));
         var wideb2 = 0;
-        var idb2 = setInterval(frameb2, 50);
+        var idb2 = setInterval(frameb2, timer);
         function frameb2() {
             if ((wideb2 >= 100) || (wide2 >= 100)) {
                 clearInterval(idb2);
@@ -524,18 +410,18 @@ $(document).on('click', '#battle', function move() {
 
             }
             if (aScore > bScore) {
-                console.log('You Win!');
+                alert('You Win!');
                 userWins++;
                 $('#aWin').text(userWins);
 
             }
             else if (bScore > aScore) {
-                console.log('You Lose!');
+                alert('You Lose!');
                 computerWins++;
                 $('#bWin').text(computerWins);
             }
             else {
-                console.log('Tie');
+                alert('Tie');
                 globalTies++;
                 $('#tie').text(globalTies);
 
@@ -544,9 +430,9 @@ $(document).on('click', '#battle', function move() {
             battleToggle = true;
             globalPlays++;
             $('#play').text(globalPlays);
-            console.log('play again?');
+            //console.log('play again?');
 
-        }, 3500);
+        }, 1500);
 
 
         reset();
