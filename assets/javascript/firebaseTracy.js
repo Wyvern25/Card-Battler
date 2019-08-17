@@ -1,6 +1,7 @@
 
 $(function (){
 
+
 //==================SIGN UP=====================//
   $("#signUp").on("click", function(){
     var emailUser = $("#email").val();
@@ -8,7 +9,7 @@ $(function (){
     var password = $("#password").val();
     
     if (email.length < 4) {
-      alert('Please enter a valid email address.');
+      alert('Please enter a username.');
       return;
     }
     if (password.length < 4) {
@@ -28,30 +29,20 @@ $(function (){
       }
       console.log(error);
       // [END_EXCLUDE]
-    });
-  
-  });
-  
-//==============EMAIL VERIFICATION =====================//
-  $("#verifyEmail").on("click", function () {
-    //Firebase function to send email verification to user
-    firebase.auth().currentUser.sendEmailVerification().then(function() {
-      // [START_EXCLUDE]
-      alert('Email Verification Sent!');
-      // [END_EXCLUDE]
-    });
-  });
 
-//===============SIGN IN==========================//
+    });
+  });
+  
+//===============Toggle LogIn/LogOut button==========================//
   $("#logIn").on("click", function(){
     if (firebase.auth().currentUser) { //currentUser: current authentication state of the web is signed in
-      firebase.auth().signOut(); //then sign the user out
+      firebase.auth().signOut(); //then click the button will sign the user out
     } else {
       var emailUser = $("#email").val();
-      var email = emailUser + "@gmail.com"
+      var email = emailUser + "@gmail.com";
       var password = $("#password").val();
       if (email.length < 4) {
-        alert('Please enter an email address.');
+        alert('Please enter a valid username.');
         return;
       }
       if (password.length < 4) {
@@ -70,7 +61,8 @@ $(function (){
           alert(errorMessage);
         }
         console.log(error);
-        $(this).prop("disabled", false)
+        $(this).prop("disabled", false);
+        
         // [END_EXCLUDE]
       });
     $(this).prop("disabled", true) //disable logIn function after firebase approves user authentication
@@ -83,7 +75,7 @@ $(function (){
     $("#signUp").show();
     $(".logInPage").show();
     $(".signUpPage").hide();
-    $("#forgot").hide();
+    
   })
 
   $(".logInLink").on("click",function(){
@@ -91,9 +83,79 @@ $(function (){
     $("#logIn").show();
     $("#signUp").hide();
     $(".logInPage").hide();
-    $(".signUpPage").show();
-    $("#forgot").show();
   })
+
+//Function to listen for authentication changes, aka signed in or signed out
+  function authStateMonitor() {
+    // Firebase triggers listener when the user signs in or out
+    firebase.auth().onAuthStateChanged(function(user) {
+      // [START_EXCLUDE silent]
+        //At reload, when there is not any user in Firebase yet
+      $("#verifyEmail").prop("disabled", true);
+      $("#logIn").prop("disabled", false);
+      // [END_EXCLUDE]
+
+      if (user) { //When user is signed in.
+        $(".welcomeBack").show();
+        $(".signUpPage").hide();
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var providerData = user.providerData;
+        
+
+        //====ADD TO DATABASE
+        var userRef = firebase.database().ref("userInfo");
+        userRef.set({
+        name: user.displayName,
+        email: user.email,
+        uid: user.uid,
+        emailVerified: user.emailVerified,
+      })
+
+          //Display for monitoring purpose
+        $("#sign-in-status").text("Signed In");
+        var currentUserInfo = JSON.stringify(user, null, '  ');//when sending data to server, data has to be a string
+        $("#account-details").text(currentUserInfo);
+        
+          //Change login button to logout
+        $("#logIn").text("Logout"); 
+        
+        if (!emailVerified) { //If user is signed in but has not been verified thru email
+          $("#verifyEmail").prop("disabled", false);
+        }
+        
+      }else{ //When user is signed out.
+        // [START_EXCLUDE]
+        $(".welcomeBack").hide();
+        $("#sign-in-status").text("Signed out")
+        $("#account-details").text("null");
+        $("#signIn").text("Login") //change back to login
+        // [END_EXCLUDE]
+      }
+    });
+  }
+
+  window.onload = function() {
+    authStateMonitor();
+    $(".logInPage").hide();
+    $("#signUp").hide();
+    $("#resetPassword").hide();
+  };
+
+//=========N/A for this game but dont delete========//
+  //==============EMAIL VERIFICATION =====================//
+  $("#verifyEmail").on("click", function () {
+    //Firebase function to send email verification to user
+    firebase.auth().currentUser.sendEmailVerification().then(function() {
+      // [START_EXCLUDE]
+      alert('Email Verification Sent!');
+      // [END_EXCLUDE]
+    });
+  });
 
   $("#resetPassword").on("click", function() {
     var email = $("#email").val();
@@ -116,56 +178,4 @@ $(function (){
       // [END_EXCLUDE]
     });
   });
-
-//Function to listen for authentication changes, aka signed in or signed out
-  function authStateMonitor() {
-    // Firebase triggers listener when the user signs in or out
-    firebase.auth().onAuthStateChanged(function(user) {
-      // [START_EXCLUDE silent]
-        //At reload, when there is not any user in Firebase yet
-      $("#verifyEmail").prop("disabled", true);
-      $("#logIn").prop("disabled", false);
-      // [END_EXCLUDE]
-
-      if (user) { //When user is signed in.
-        var displayName = user.displayName;
-        var email = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-        var providerData = user.providerData;
-        // [START_EXCLUDE]
-
-        // [START_EXCLUDE]
-          //Display for monitoring purpose
-        $("#sign-in-status").text("Signed In");
-        var currentUserInfo = JSON.stringify(user, null, '  ');//when sending data to server, data has to be a string
-        $("#account-details").text(currentUserInfo);
-        
-          //Change login button to logout
-        $("#logIn").text("Logout"); 
-        
-        if (!emailVerified) { //If user is signed in but has not been verified thru email
-          $("#verifyEmail").prop("disabled", false);
-        }
-        // [END_EXCLUDE]
-
-      }else{ //When user is signed out.
-        // [START_EXCLUDE]
-        $("#sign-in-status").text("Signed out")
-        $("#account-details").text("null");
-        $("#signIn").text("Login") //change back to login
-        // [END_EXCLUDE]
-      }
-    });
-  }
-
-  window.onload = function() {
-    authStateMonitor();
-    $(".logInPage").hide();
-    $("#signUp").hide();
-    $("#resetPassword").hide();
-  };
-
 });

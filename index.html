@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="assets/css/reset.css">
 
   <!--Link Bootstrap 4-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!--Link game CSS-->
   <link rel="stylesheet" href="assets/css/styleTracy.css">
 </head>
@@ -30,18 +31,22 @@
                 <input type="text" class="form-control" id="email" name="email" placeholder="username">
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="password">
+                <input type="password" class="form-control" id="password" name="password" autocomplete="off"
+                  placeholder="password">
               </div>
               <div class="form-group">
                 <button class="btn btn-primary" type="submit" id="logIn" name="login">Login</button>
                 <button class="btn btn-primary" type="submit" id="signUp" name="signup">Sign Up</button>
+
+                <!-- N/A for this game, do NOT delete
                 <button class="btn btn-info d-none" type="submit" id="verifyEmail" name="verify-email">Send Email Verification</button>
                 <button class="btn btn-info" type="submit" id="resetPassword" name="verify-email">Send Password Reset Email</button>
+                -->
               </div>
               <div class="card-footer">
-                <small class="notUser">Not you? <span class="signOut"></span></small>
                 <small class="signUpPage">Don't have a account? <a class="createAccount" href="#">Create One</a></small>
                 <small class="logInPage">Have an account? <a class="logInLink" href="#">Log in !</a></small>
+                <small class="welcomeBack">Welcome Back!</small>
               </div>
             </form>
           </section>
@@ -53,7 +58,7 @@
             <h3>Your Profile</h3>
           </section>
           <section class="card-body">
-            
+
           </section>
         </div>
       </div>
@@ -75,27 +80,25 @@
   <!---=================SCRIPT AREA=================-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-database.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#config-web-app -->
-     <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    var config = {
+      apiKey: "AIzaSyBKbmD2C52-tYod9tnoFhtbsVw5bXIpLG0",
+      authDomain: "project-1-50020.firebaseapp.com",
+      databaseURL: "https://project-1-50020.firebaseio.com",
+      projectId: "project-1-50020",
+      storageBucket: "project-1-50020.appspot.com",
+      messagingSenderId: "541022669951",
+      appId: "1:541022669951:web:750dc928c07a8afb"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(config);
+  </script>
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyBKbmD2C52-tYod9tnoFhtbsVw5bXIpLG0",
-    authDomain: "project-1-50020.firebaseapp.com",
-    databaseURL: "https://project-1-50020.firebaseio.com",
-    projectId: "project-1-50020",
-    storageBucket: "project-1-50020.appspot.com",
-    messagingSenderId: "541022669951",
-    appId: "1:541022669951:web:750dc928c07a8afb"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
-  
   <!--Bootstrap JS-->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
