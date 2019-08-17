@@ -1,47 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-​
 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Food Fighter</title>
-	​
+	<title>Food Fighter Library</title>
+	<!--Link reboot/reset CSS-->
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<!--Link Bootstrap 4-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!--Link Steve CSS-->
 	<link rel="stylesheet" type="text/css" href="assets/css/steve-style.css">
+	<!--Link Tracy CSS-->
+	<link rel="stylesheet" href="assets/css/styleTracy.css">
 </head>
-​
 
 <body>
 
 	<!-- Display for 3 cards to be chosen -->
-	<section>
-		<div class='main-cards'>
-			<div class='play-card card-1' attr='card-1'></div>
-			<div class='play-card card-2' attr='card-2'></div>
-			<div class='play-card card-3' attr='card-3'></div>
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-10 mb-2 text-center">
+				<main class="card">
+					<section class="card-header ">
+						<div class='main-cards '>
+							<div class='play-card card-1' attr='card-1'></div>
+							<div class='play-card card-2' attr='card-2'></div>
+							<div class='play-card card-3' attr='card-3'></div>
+						</div>
+					</section>
+		
+					<!-- 3 separate containers for each category -->
+				
+						<section class="card-body" id='selection-screen'>
+							<section id="card-select" data-column="1">
+								<h2>Main Entree</h2>
+								<div class="card-container main-entree"></div>
+							</section>
+			
+							<section id="card-select" data-column="2">
+								<h2>Side Dish</h2>
+								<div class="card-container side-dish"></div>
+							</section>
+			
+							<section id="card-select" data-column="3">
+								<h2>Dessert</h2>
+								<div class="card-container dessert"></div>
+							</section>
+						</section>
+				</main>
+			</div>
 		</div>
-	</section>
-
-	<!-- 3 separate containers for each category -->
-	<section id='selection-screen'>
-		<section id="card-select" data-column="1">
-			<h2>Main Entree</h2>
-			<div class="card-container main-entree"></div>
-		</section>
-
-		<section id="card-select" data-column="2">
-			<h2>Side Dish</h2>
-			<div class="card-container side-dish"></div>
-		</section>
-
-		<section id="card-select" data-column="3">
-			<h2>Dessert</h2>
-			<div class="card-container dessert"></div>
-		</section>
-		​
-	</section>
+	</div>
 
 	<!-- Click button to start game -->
 	<input type="button" class="button" onclick="location.href='fightPage.html';" value="Ready" />
@@ -49,6 +62,5 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="assets/javascript/library.js"></script>
 </body>
-​
 
 </html>

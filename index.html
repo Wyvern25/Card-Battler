@@ -11,35 +11,25 @@
   <link rel="stylesheet" href="assets/css/reset.css">
 
   <!--Link Bootstrap 4-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!--Link game CSS-->
   <link rel="stylesheet" href="assets/css/styleTracy.css">
 </head>
 
 <body>
-  
   <div class="container">
-
-    <header class="row justify-content-center">
-      <div class="col-6 text-center">
-        <h2>Food Fighter</h2>
-      </div>
-    </header>
-    
     <div class="row justify-content-center">
-      <div class="col-6">
-        <section class="card">
-          <article class="card-body">
-            <h4 class="card-title">Login</h4>
+      <div class="col-md-5 mb-1 text-center">
+        <div class="card">
+          <section class="card-header">
+            <h3>Login</h3>
+          </section>
+          <section class="card-body">
             <form>
               <div class="form-group">
-                <label for="email">Username</label>
                 <input type="text" class="form-control" id="email" name="email" placeholder="username">
               </div>
               <div class="form-group">
-                <label for="password">Password</label>
-                <small><a href="#" id="forgot">Forgot password?</a></small>
                 <input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="password">
               </div>
               <div class="form-group">
@@ -49,13 +39,26 @@
                 <button class="btn btn-info" type="submit" id="resetPassword" name="verify-email">Send Password Reset Email</button>
               </div>
               <div class="card-footer">
+                <small class="notUser">Not you? <span class="signOut"></span></small>
                 <small class="signUpPage">Don't have a account? <a class="createAccount" href="#">Create One</a></small>
                 <small class="logInPage">Have an account? <a class="logInLink" href="#">Log in !</a></small>
               </div>
             </form>
-          </article>
-        </section>
+          </section>
+        </div>
       </div>
+      <div class="col-md-5 mb-4 text-center">
+        <div class="card">
+          <section class="card-header">
+            <h3>Your Profile</h3>
+          </section>
+          <section class="card-body">
+            
+          </section>
+        </div>
+      </div>
+
+
     </div>
   </div>
 
