@@ -333,6 +333,8 @@ function stager() {
  */
 }
 
+
+//===========BATTLE=======================
 $(document).on('click', '#battle', function move() {
     removeKeys();
     allA();
@@ -495,15 +497,31 @@ $(document).on('click', '#battle', function move() {
             $('#battle').text("Fight Again?");
         }, 1500);
 
-
         reset();
 
 
+    //=======================Firebase============//
+    var user = firebase.auth().currentUser;
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            var uid = user.uid;
+            var userRef = firebase.database().ref("/users/"+uid);
+            userRef.set({
+                wins: userWins,
+                plays: globalPlays,
+        })
+        }
+
+        userRef.on("child_added",function (snapshot){
+            var id = snapshot.key;
+            console.log(id);
+            var fireData = snapshot.val();
 
 
-
-
-
+        })
+        
+    })
 
         // for (var j = 0; j < 6; j++) {
         //     if (scoreGlobal[j] == 100) {
@@ -515,6 +533,9 @@ $(document).on('click', '#battle', function move() {
 
     }
 })
+//=========END OF BATTLE======================//
+
+
 
 /* my own responsive formating cut for time constraints
 function windowH() {
@@ -568,3 +589,5 @@ $('#aWin').text(userWins);
 $('#bWin').text(computerWins);
 $('#tie').text(globalTies);
 $('#play').text(globalPlays);
+
+

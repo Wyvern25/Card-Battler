@@ -39,11 +39,6 @@ function makeInfoBox(controlDiv, map) {
  * @param {function()} onAuthSuccess - Called when authentication succeeds.
  */
 function initAuthentication(onAuthSuccess) {
-    firebase.auth().signInAnonymously().catch(function (error) {
-        console.log(error.code + ', ' + error.message);
-    }, {
-        remember: 'sessionOnly'
-    });
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
@@ -66,18 +61,21 @@ function initMap() {
     {
       name: "San Francisco, USA",
       icon: "assets/images/SF-icon.png",
+      background: 1,
       lat: 37.77,
-      lng: -122.43
+      lng: -122.43,
     },
     {
       name: "London, UK",
       icon: "assets/images/london-icon.png",
+      background: 2,
       lat: 51.50,
       lng: -0.123,
     },
     {
       name: "Jakarta, Indonesia",
       icon: "assets/images/indo-icon.png",
+      background: 3,
       lat: -6.21,
       lng: 106.84
     }
@@ -117,8 +115,12 @@ function initMap() {
       cityMarker.addListener("click", function(){
         if (cityMarker.getAnimation() !== null) {
           cityMarker.setAnimation(null);
+          
         } else {
           cityMarker.setAnimation(google.maps.Animation.BOUNCE);
+          setTimeout(function(){
+            location.href = "fightPage.html"  
+          },2000)
         }
       })
       
@@ -126,10 +128,8 @@ function initMap() {
         infoBox.close();
       });
 
-
     })
 
-    
     // Create the DIV to hold the control and call the makeInfoBox() constructor
     // passing in this DIV.
     var infoBoxDiv = document.createElement('div');
