@@ -1,5 +1,3 @@
-/*Tracy*/
-
 body {
   margin-top: 8rem;
 }
@@ -10,6 +8,7 @@ body {
   background-color: grey;
 }
 
+/*login page*/
 /*Steve*/
 p {
   margin: 0;
@@ -29,3 +28,6 @@ p {
 .toMapBtn {
   margin-left: 2rem;
 }
+
+/*Dave*/
+

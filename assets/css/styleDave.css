@@ -1,23 +1,4 @@
-html {
-     /* display:flex; */
-    flex-direction: column;
-    height: 95vh;
-    width: 100%;
-    border: 1px solid yellow;
-}
-div, p, span, button {
-flex:1;
-}
 
-#container{
-    /* height: 100%; */
-    /* display:flex; */
-    margin-left: 5%;
-    /* height: 90vh; */
-    /*background-color:black;*/
-    color:white;
-    border: 1px solid green;
-}
 
 h1{
     /* flex:1; */
@@ -27,25 +8,21 @@ h1{
     background-color: orange;
     margin-bottom: 3%;
 }
-#container{
-    /* flex: 1; */
-    background-color: black;
-    width: 90%;
-}
-#teamNames{
-    /* flex:1; */
+
+/* #teamNames{
+   
     text-align: center;
 }
-
-
-
-#battleWrapper,
 #teamNames{
-    /* flex: 1; */
+   
     width:100%;
     text-align: center;
     background-color: black;
 }
+ */
+
+
+#battleWrapper,
 #lifeA1,
 #lifeA2,
 #lifeA3 {
@@ -71,8 +48,6 @@ background-color: red;
     background-color: white;
 }
 
-
-
 #cardA1,
 #cardA2,
 #cardA3,
@@ -90,19 +65,7 @@ background-color: red;
     
 }
 
-img {
-    /* flex: 1; */
-    max-width: auto;
-    height: 100%;
-    /* display: flex; */
-    /* flex-flow: row nowrap; */
-    align-items: center; 
-}
 
-
-#clearFloat{
-clear: both;
-}
 #foodStats,
 #foodA1Value,
 #foodA2Value,
@@ -112,7 +75,7 @@ clear: both;
 #foodB2Value,
 #foodB3Value,
 
-/* below for comparison */
+
 #foodA1Compare,
 #foodA2Compare,
 #foodA3Compare,
@@ -125,9 +88,9 @@ clear: both;
     text-align: center;
     margin-left:1%;    
     width: 31%;
-    height:15px;
+    height:30px;
     border: 2px solid black;
-    background-color: black;
+    
 }
 
 #foodA1,
@@ -137,7 +100,6 @@ clear: both;
 #foodB1,
 #foodB2,
 #foodB3{
-    width: 100%;
     display: block;
     margin: auto;
     height: 100%;
@@ -145,7 +107,7 @@ clear: both;
 
 #battle {
     flex: 1;
-    width: auto%;
+    width: auto;
     display: block;
     margin: auto;
 }
