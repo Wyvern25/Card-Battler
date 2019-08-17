@@ -309,7 +309,15 @@ function dessertStats() {
 	})
 }
 
+$('.toMapBtn').on('click', function() {
+	if (!(myThreeFoods[0]) == false && !(myThreeFoods[1]) == false && !(myThreeFoods[2]) == false) {
+			location.href = "map.html"
+	} else {
+			console.log('please select 3 total')
+	}
+})
 
+//FIREBASE
 
 
 

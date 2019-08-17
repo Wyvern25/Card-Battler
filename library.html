@@ -28,11 +28,14 @@
 			<div class="col-md-10 mb-2 text-center">
 				<main class="card">
 					<section class="card-header ">
-						<div class='main-cards '>
-							<div class='play-card card-1' attr='card-1'></div>
-							<div class='play-card card-2' attr='card-2'></div>
-							<div class='play-card card-3' attr='card-3'></div>
-						</div>
+						<section class="row justify-content-center">
+							<div class='col-6 main-cards '>
+								<div class='play-card card-1' attr='card-1'></div>
+								<div class='play-card card-2' attr='card-2'></div>
+								<div class='play-card card-3' attr='card-3'></div>
+							</div>
+							<div class="col-2 align-self-center"><input type="button" class="btn btn-info toMapBtn" value="Ready" /></div>
+						</section>
 					</section>
 		
 					<!-- 3 separate containers for each category -->
@@ -58,9 +61,35 @@
 	</div>
 
 	<!-- Click button to start game -->
-	<input type="button" class="button" onclick="location.href='fightPage.html';" value="Ready" />
 
+
+
+<!---=================SCRIPT AREA=====================-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-database.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var config = {
+      apiKey: "AIzaSyBKbmD2C52-tYod9tnoFhtbsVw5bXIpLG0",
+      authDomain: "project-1-50020.firebaseapp.com",
+      databaseURL: "https://project-1-50020.firebaseio.com",
+      projectId: "project-1-50020",
+      storageBucket: "project-1-50020.appspot.com",
+      messagingSenderId: "541022669951",
+      appId: "1:541022669951:web:750dc928c07a8afb"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(config);
+  </script>
+
+  <!--Bootstrap JS-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
 	<script src="assets/javascript/library.js"></script>
 </body>
 ​

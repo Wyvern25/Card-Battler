@@ -96,8 +96,15 @@ $(function (){
       // [END_EXCLUDE]
 
       if (user) { //When user is signed in.
-        $(".welcomeBack").show();
-        $(".signUpPage").hide();
+        //$(".loginTitle").html("<p class='lead'>Welcome back!</p>");
+        //$(".usernameInput").html("<p class='lead'>Your profile from last game</p>");
+        //$(".passwordInput").hide();
+        //$(".loginFooter").hide();
+
+        //redirect user to next page library
+        window.location ="library.html";
+       
+
         var displayName = user.displayName;
         var email = user.email;
         var emailVerified = user.emailVerified;
@@ -107,7 +114,7 @@ $(function (){
         var providerData = user.providerData;
         
 
-        //====ADD TO DATABASE
+        //then add user info to database
         var userRef = firebase.database().ref("userInfo");
         userRef.set({
         name: user.displayName,
@@ -122,7 +129,7 @@ $(function (){
         $("#account-details").text(currentUserInfo);
         
           //Change login button to logout
-        $("#logIn").text("Logout"); 
+        $("#logIn").text("Logout").addClass("btn-secondary"); 
         
         if (!emailVerified) { //If user is signed in but has not been verified thru email
           $("#verifyEmail").prop("disabled", false);
