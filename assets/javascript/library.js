@@ -86,7 +86,7 @@ var desserts = [
 	},
 	{
 		searchTerm: "snow-cone",
-		displayImg: "assets/images/sno-cone.png"
+		displayImg: "assets/images/snow-cone.png"
 	}
 ]
 
@@ -116,7 +116,6 @@ var myThreeFoods = ['', '', ''];
 $(document).on('click', '.flipper', function () {
 
 	var source = $(this).attr("source")
-	//This selects the whole column (all 6) - so each category goes to the correct button on top
 	var cardSelect = $(this).parent().parent().attr("data-column");
 	if (cardSelect === '1') {
 		if (foodObj[cardSelect - 1].display) {
@@ -133,6 +132,7 @@ $(document).on('click', '.flipper', function () {
 			foodObj[cardSelect - 1].source = source
 			//update myThreeFoods array 
 			myThreeFoods[0] = $(this).attr('searchWord');
+			localStorage.setItem("pleaseWork0", myThreeFoods[0]);
 		}
 	} else if (cardSelect === '2') {
 		if (foodObj[cardSelect - 1].display) {
@@ -148,6 +148,7 @@ $(document).on('click', '.flipper', function () {
 			foodObj[cardSelect - 1].display = true
 			foodObj[cardSelect - 1].source = source
 			myThreeFoods[1] = $(this).attr('searchWord');
+			localStorage.setItem("pleaseWork1", myThreeFoods[1]);
 		}
 	} else if (cardSelect === '3') {
 		if (foodObj[cardSelect - 1].display) {
@@ -155,6 +156,7 @@ $(document).on('click', '.flipper', function () {
 				$('.card-3 img').attr('src', $(this).attr('imgFile'))
 				myThreeFoods[2] = $(this).attr('searchWord');
 				foodObj[cardSelect - 1].source = source
+				localStorage.setItem("pleaseWork2", myThreeFoods[2]);
 			}
 		} else {
 			var img = $('<img>');
@@ -163,6 +165,7 @@ $(document).on('click', '.flipper', function () {
 			foodObj[cardSelect - 1].display = true
 			foodObj[cardSelect - 1].source = source
 			myThreeFoods[2] = $(this).attr('searchWord');
+			localStorage.setItem("pleaseWork2", myThreeFoods[2]);
 		}
 	}
 })
@@ -276,7 +279,7 @@ function dessertStats() {
 
 		$(".dessert").append(dessertItem);
 
-		var APIkey3 = 'bd8398262899eee9c356a37a4505df49';
+		var APIkey3 = 'e0b064a470f62c47babb0a7f575594fe';
 		var dessertType = this.searchTerm.split(' ').join('%20');
 		var queryURL3 = 'https://api.edamam.com/api/food-database/parser?ingr=' + dessertType + '&app_id=4cb41cfc&app_key=' + APIkey3;
 
@@ -309,9 +312,12 @@ function dessertStats() {
 	})
 }
 
-
-
-
-
+$('.button').on('click', function () {
+	if (!(myThreeFoods[0]) == false && !(myThreeFoods[1]) == false && !(myThreeFoods[2]) == false) {
+		location.href = 'map.html';  //link will go here for next page
+	} else {
+		console.log('please select 3 total')
+	}
+})
 
 

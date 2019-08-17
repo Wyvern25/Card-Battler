@@ -1,7 +1,7 @@
 var playerCards = ["whopper", "fries", "cookie"];
-var foodCard0 = mainFoods;
-var foodCard1 = sideFoods;
-var foodCard2 = desserts;
+var foodCard0;
+var foodCard1;
+var foodCard2;
 //tracy & dave save variable 
 //tracy dynamic these to db please
 var userWins = 0;
@@ -12,9 +12,19 @@ var globalPlays = 0;
 //var userFood[foodObj1.Name, foodObj2.Name, foodObj3.Name];
 
 /************** */
-// whopper carb + 20
-// hot dog carb + 40
+
 /************** */
+var startVar = false;
+
+var playCards = [localStorage.getItem("pleaseWork0"), localStorage.getItem("pleaseWork1"), localStorage.getItem("pleaseWork2")];
+//console.log('dave' + playCards);
+
+function removeKeys() {
+    localStorage.removeItem("pleaseWork0");
+    localStorage.removeItem("pleaseWork1");
+    localStorage.removeItem("pleaseWork2");
+}
+$('#battle').text("Please Wait");
 
 var weatherRandomizer = {
     Name: '??',
@@ -74,16 +84,26 @@ $(document).on('click', '#teamBAll', function () {
 */
 
 setTimeout(function () {
+    foodCard0 = mainFoods;
+    foodCard1 = sideFoods;
+    foodCard2 = desserts;
+    // whopper carb + 20
+    foodCard0[0].Carbs += 20;
+    // hot dog carb + 40
+    foodCard0[2].Carbs += 40;
+    //fries carb +11
+    foodCard1[1].Carbs += 11;
     allA();
     allB();
-
-}, 1000);
+    $('#battle').text("Fight!");
+    startVar = true;
+}, 5000);
 
 function userCardChoice() {
 
 
     //fail to pick 3, get default
-    if (myThreeFoods.includes("")) {
+    if (playCards.length != 3) {
         m[0] = mainFoods.map(function (e) { return e.searchTerm; }).indexOf(playerCards[0]);
 
 
@@ -94,13 +114,13 @@ function userCardChoice() {
 
         //user choice preserved if 3 chosen
     } else {
-        m[0] = mainFoods.map(function (e) { return e.searchTerm; }).indexOf(myThreeFoods[0]);
+        m[0] = mainFoods.map(function (e) { return e.searchTerm; }).indexOf(playCards[0]);
 
 
-        m[1] = sideFoods.map(function (e) { return e.searchTerm; }).indexOf(myThreeFoods[1]);
+        m[1] = sideFoods.map(function (e) { return e.searchTerm; }).indexOf(playCards[1]);
 
 
-        m[2] = desserts.map(function (e) { return e.searchTerm; }).indexOf(myThreeFoods[2]);
+        m[2] = desserts.map(function (e) { return e.searchTerm; }).indexOf(playCards[2]);
 
     }
 
@@ -112,7 +132,7 @@ function userCardChoice() {
 }
 
 function allA() {
-    console.log(m);
+    //console.log(m);
     userCardChoice();
     $('#foodA1Value').text("");
     $('#foodA2Value').text("");
@@ -126,7 +146,16 @@ function allA() {
 
 
     //image swap will replace w/ firebase
-
+    //anti refresh trick
+    if ((typeof m[0] === "undefined") || (m[0] == -1)) {
+        m[0] = 0;
+    }
+    if ((typeof m[1] === "undefined") || (m[1] == -1)) {
+        m[1] = 0;
+    }
+    if ((typeof m[2] === "undefined") || (m[2] == -1)) {
+        m[2] = 0;
+    }
     imageSwap.push(foodCard0[m[0]].displayImg, foodCard1[m[1]].displayImg, foodCard2[m[2]].displayImg);
 
 
@@ -212,7 +241,7 @@ function wRandom() {
     weatherRandomizer.Card = Math.ceil(Math.random() * 3);
     weatherRandomizer.Stat = Math.ceil(Math.random() * 4);
     weatherRandomizer.Value = Math.ceil(Math.random() * 51 + 74) / 100;
-    weatherRandomizer.stageSelect = Math.ceil(Math.random() * 4);
+    weatherRandomizer.stageSelect = Math.ceil(Math.random() * 2);
     wcolor = weatherRandomizer.modColor();
 
     $('#stageEffects').text(weatherRandomizer.Card + ' / ' + weatherRandomizer.Stat + ' / ' + weatherRandomizer.Value);/* + ' / ' + wcolor);*/
@@ -296,15 +325,16 @@ stager();
 function stager() {
     wRandom();
     if (weatherRandomizer.stageSelect == 1) {
-        document.body.style.backgroundImage = "url('assets/images/burger.png')";
-    } else if (weatherRandomizer.stageSelect == 2) {
-        document.body.style.backgroundImage = "url('assets/images/pasta.png')";
-    } else if (weatherRandomizer.stageSelect == 3) {
+        document.body.style.backgroundImage = "url('assets/images/London-background.png')";
+    } else {
+        document.body.style.backgroundImage = "url('assets/images/SF-background.png')";
+    }/* else if (weatherRandomizer.stageSelect == 3) {
         document.body.style.backgroundImage = "url('assets/images/cake.png')";
-    } else { document.body.style.backgroundImage = "url('assets/images/fries.png')"; }
+ */
 }
 
 $(document).on('click', '#battle', function move() {
+    removeKeys();
     allA();
     allB();
     wRandom();
@@ -462,7 +492,7 @@ $(document).on('click', '#battle', function move() {
             globalPlays++;
             $('#play').text(globalPlays);
             //console.log('play again?');
-
+            $('#battle').text("Fight Again?");
         }, 1500);
 
 
@@ -506,10 +536,10 @@ function windowH() {
         .css({ height: wH * .02 });
     $('.span').css({ height: wH * .02 });
 }
-
+ 
 windowH();
-
-
+ 
+ 
 window.onresize = function (event) {
     windowH();
 }
@@ -538,4 +568,3 @@ $('#aWin').text(userWins);
 $('#bWin').text(computerWins);
 $('#tie').text(globalTies);
 $('#play').text(globalPlays);
-
