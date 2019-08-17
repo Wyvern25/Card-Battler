@@ -312,12 +312,14 @@ function dessertStats() {
 	})
 }
 
-$('.button').on('click', function () {
+$('.toMapBtn').on('click', function() {
 	if (!(myThreeFoods[0]) == false && !(myThreeFoods[1]) == false && !(myThreeFoods[2]) == false) {
-		location.href = 'map.html';  //link will go here for next page
+			location.href = "map.html"
 	} else {
-		console.log('please select 3 total')
+			console.log('please select 3 total')
 	}
 })
+
+//FIREBASE
 
 
