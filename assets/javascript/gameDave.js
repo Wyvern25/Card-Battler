@@ -1,4 +1,4 @@
-var playerCards = [];
+var playerCards = ["whopper", "fries", "cookie"];
 var foodCard0 = mainFoods;
 var foodCard1 = sideFoods;
 var foodCard2 = desserts;
@@ -31,13 +31,6 @@ var weatherRandomizer = {
             } else { return 'white'; }
         }
 }
-//
-
-
-
-allB();
-
-
 
 
 var scoreGlobal = [];
@@ -51,7 +44,7 @@ var globalHPB = [];
 var globalAtkB = [];
 var globalDefB = [];
 var globalCriB = [];
-
+var m = [];
 
 
 
@@ -79,13 +72,48 @@ $(document).on('click', '#teamBAll', function () {
     allB();
 })
 */
-function userCardRandomizer() {
-    var i = Math.floor(Math.random() * 6);
-    playerCards.push(foodCard0[i].searchTerm, foodCard1[i].searchTerm, foodCard2[i].searchTerm);
+
+setTimeout(function () {
+    allA();
+    allB();
+
+}, 1000);
+
+function userCardChoice() {
+
+
+    //fail to pick 3, get default
+    if (myThreeFoods.includes("")) {
+        m[0] = mainFoods.map(function (e) { return e.searchTerm; }).indexOf(playerCards[0]);
+
+
+        m[1] = sideFoods.map(function (e) { return e.searchTerm; }).indexOf(playerCards[1]);
+
+
+        m[2] = desserts.map(function (e) { return e.searchTerm; }).indexOf(playerCards[2]);
+
+        //user choice preserved if 3 chosen
+    } else {
+        m[0] = mainFoods.map(function (e) { return e.searchTerm; }).indexOf(myThreeFoods[0]);
+
+
+        m[1] = sideFoods.map(function (e) { return e.searchTerm; }).indexOf(myThreeFoods[1]);
+
+
+        m[2] = desserts.map(function (e) { return e.searchTerm; }).indexOf(myThreeFoods[2]);
+
+    }
+
+    //else if
+
+    //var i = Math.floor(Math.random() * 6);
+    //playerCards.push(foodCard0[i].searchTerm, foodCard1[i].searchTerm, foodCard2[i].searchTerm);
 
 }
 
 function allA() {
+    console.log(m);
+    userCardChoice();
     $('#foodA1Value').text("");
     $('#foodA2Value').text("");
     $('#foodA3Value').text("");
@@ -95,27 +123,29 @@ function allA() {
     teamA3 = [];
     teamA4 = [];
 
-    var z = Math.floor(Math.random() * 6);
+
 
     //image swap will replace w/ firebase
 
-    imageSwap.push(foodCard0[z].displayImg, foodCard1[z].displayImg, foodCard2[z].displayImg);
+    imageSwap.push(foodCard0[m[0]].displayImg, foodCard1[m[1]].displayImg, foodCard2[m[2]].displayImg);
+
 
     //generates 1st stat, hp from KCal
-    teamA.push(foodCard0[z].Calories, foodCard1[z].Calories, foodCard2[z].Calories);
+
+    teamA.push(foodCard0[m[0]].Calories, foodCard1[m[1]].Calories, foodCard2[m[2]].Calories);
     globalHPA = teamA;
 
     //generates 2nd stat, atk from Carbs
-    teamA2.push(foodCard0[z].Carbs, foodCard1[z].Carbs, foodCard2[z].Carbs);
+    teamA2.push(foodCard0[m[0]].Carbs, foodCard1[m[1]].Carbs, foodCard2[m[2]].Carbs);
     globalAtkA = teamA2;
 
     //generates 3rd stat, def from Protein
-    teamA3.push(foodCard0[z].Protein, foodCard1[z].Protein, foodCard2[z].Protein);
+    teamA3.push(foodCard0[m[0]].Protein, foodCard1[m[1]].Protein, foodCard2[m[2]].Protein);
     globalDefA = teamA3;
 
 
     //generates 4th stat, cri from fat
-    teamA4.push(foodCard0[z].Fat, foodCard1[z].Fat, foodCard2[z].Fat);
+    teamA4.push(foodCard0[m[0]].Fat, foodCard1[m[1]].Fat, foodCard2[m[2]].Fat);
     globalCriA = teamA4;
 
 
@@ -123,7 +153,8 @@ function allA() {
     $('#foodA1').attr('src', imageSwap[0]);
     $('#foodA2').attr('src', imageSwap[1]);
     $('#foodA3').attr('src', imageSwap[2]);
-    //adds 4 STATS and displays on click 
+    //adds 4 STATS and displays on click
+
     $('#foodA1Value').text(teamA2[0] + " / " + teamA3[0] + " / " + teamA4[0] + " / " + teamA[0]);
     $('#foodA2Value').text(teamA2[1] + " / " + teamA3[1] + " / " + teamA4[1] + " / " + teamA[1]);
     $('#foodA3Value').text(teamA2[2] + " / " + teamA3[2] + " / " + teamA4[2] + " / " + teamA[2]);
@@ -265,12 +296,12 @@ stager();
 function stager() {
     wRandom();
     if (weatherRandomizer.stageSelect == 1) {
-        document.body.style.background = 'red';
+        document.body.style.backgroundImage = "url('assets/images/burger.png')";
     } else if (weatherRandomizer.stageSelect == 2) {
-        document.body.style.background = 'green';
+        document.body.style.backgroundImage = "url('assets/images/pasta.png')";
     } else if (weatherRandomizer.stageSelect == 3) {
-        document.body.style.background = 'blue';
-    } else { document.body.style.background = 'purple'; }
+        document.body.style.backgroundImage = "url('assets/images/cake.png')";
+    } else { document.body.style.backgroundImage = "url('assets/images/fries.png')"; }
 }
 
 $(document).on('click', '#battle', function move() {
