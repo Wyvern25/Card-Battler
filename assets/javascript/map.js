@@ -61,21 +61,21 @@ function initMap() {
     {
       name: "San Francisco, USA",
       icon: "assets/images/SF-icon.png",
-      background: 1,
+      background: "url('assets/images/SF-background.png')",
       lat: 37.77,
       lng: -122.43,
     },
     {
       name: "London, UK",
       icon: "assets/images/london-icon.png",
-      background: 2,
+      background: "url('assets/images/London-background.png')",
       lat: 51.50,
       lng: -0.123,
     },
     {
       name: "Jakarta, Indonesia",
       icon: "assets/images/indo-icon.png",
-      background: 3,
+      background: "url('assets/images/Jakarta-background.png')",
       lat: -6.21,
       lng: 106.84
     }
@@ -107,6 +107,7 @@ function initMap() {
       var infoBox = new google.maps.InfoWindow ({
         content: this.name,
       });
+      var mapImg = this.background;
 
       cityMarker.addListener("mouseover", function(){ //display country name when mouseover
         infoBox.open(map,cityMarker)
@@ -118,8 +119,10 @@ function initMap() {
           
         } else {
           cityMarker.setAnimation(google.maps.Animation.BOUNCE);
+          localStorage.setItem("battleBackground", mapImg);
           setTimeout(function(){
-            location.href = "fightPage.html"  
+            location.href = "fightPage.html";  
+            ;
           },2000)
         }
       })
@@ -152,6 +155,18 @@ function initMap() {
 
     initAuthentication(initFirebase.bind(undefined, heatmap));
 }
+
+//=============Logout==========//
+$(".logoutMap").on("click", function () {
+  firebase.auth().signOut();
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      console.log("user is still signed in")
+    } else {
+      window.location = "index.html"
+    }
+  })
+})
 
 /**
  * Set up a Firebase with deletion on clicks older than expiryMs

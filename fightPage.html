@@ -17,7 +17,7 @@
 
 </head>
 
-<body>
+<body id="fightBackground">
   
   <!-- <div id='Debug Buttons'>
       <button id="allGemSpawn">All gem Spawn</button>
@@ -48,7 +48,7 @@
               </div>
         
               <div id='cardA1'>
-                <img class="img-fluid" id='foodA1' src="assets/images/burger.png" hiddenv="">
+                <img id='foodA1' src="assets/images/burger.png" hiddenv="">
               </div>
               <div id='cardA2'>
                 <img id='foodA2' src="assets/images/fries.png" hiddenv="">
@@ -56,7 +56,7 @@
               <div id='cardA3'>
                 <img id='foodA3' src="assets/images/ice-cream.png" hiddenv="">
               </div>
-        
+              <br>
               <div id='clearFloat'></div>
         
               <br>
@@ -75,20 +75,20 @@
     
   
           <section class="card">
-            <articl class="card-body">
+            <article class="card-body p-1">
               <div id='clearFloat'></div>
               <br>
         
               <button id="battle">Battle</button>
               <!-- <button id="weather">Weather</button> -->
-              <br>
+            
               <span> Stage Effects: Card / Stat / %Mod</span>
               <p>
-                <span id='stageEffects'>
+                <span id='stageEffects'></span>
               </p>
-              </span>
+              <div class="firebaseScore text-info p-1"></div>
               <br>
-            </articl>
+            </article>
       </section>
 
       <section class="card">
@@ -136,14 +136,18 @@
             <article class="card-header"><p id='teamNames'>Computer Team</p></article>
           </section>
           
-          <sectio class="card">
-            <div id="winLoss">
+          <section class="card">
+            <article class="card-body" id="winLoss">
               <p>User Wins: <span id='aWin'></span></p>
               <p>Computer Wins: <span id='bWin'></span></p>
               <p>Ties: <span id='tie'></span></p>
               <p>Plays: <span id='play'></span></p>
-            </div>
-          </sectio>
+            </article>
+            <article class="card-footer">
+              <button class="btn btn-secondary logoutFight">Logout</button>
+            </article>
+          </section>
+
         </div>
       </div>
     </div>

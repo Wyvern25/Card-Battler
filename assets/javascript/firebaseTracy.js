@@ -2,10 +2,47 @@
 $(function (){
 
 
-//==================SIGN UP=====================//
-  $("#signUp").on("click", function(){
+//===============Toggle LogIn/LogOut button==========================//
+$("#logIn").on("click", function(){
+  if (firebase.auth().currentUser) { //currentUser: current authentication state of the web is signed in
+    firebase.auth().signOut(); //then click the button will sign the user out
+  } else {
     var emailUser = $("#email").val();
     var email = emailUser + "@gmail.com";
+    var password = $("#password").val();
+    if (email.length < 4) {
+      alert('Please enter a valid username.');
+      return;
+    }
+    if (password.length < 4) {
+      alert('Please enter a password.');
+      return;
+    }
+    //Firebase function to authenticate user's email and password
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // [START_EXCLUDE]
+      if (errorCode === 'auth/wrong-password') {
+        alert('Wrong password.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+      $(this).prop("disabled", false);
+      
+      // [END_EXCLUDE]
+    });
+  $(this).prop("disabled", true) //disable logIn function after firebase approves user authentication
+  }
+})
+
+//==================SIGN UP=====================//
+  
+  $("#signUp").on("click", function(){
+    var emailUser = $("#email").val();
+    var email = emailUser + "@gmail.com"; //bypass email credentials
     var password = $("#password").val();
     
     if (email.length < 4) {
@@ -16,6 +53,7 @@ $(function (){
       alert('Please enter a password.');
       return;
     }
+
     //Create new user in firebase
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
       // Handle Errors here.
@@ -33,41 +71,21 @@ $(function (){
     });
   });
   
-//===============Toggle LogIn/LogOut button==========================//
-  $("#logIn").on("click", function(){
-    if (firebase.auth().currentUser) { //currentUser: current authentication state of the web is signed in
-      firebase.auth().signOut(); //then click the button will sign the user out
-    } else {
-      var emailUser = $("#email").val();
-      var email = emailUser + "@gmail.com";
-      var password = $("#password").val();
-      if (email.length < 4) {
-        alert('Please enter a valid username.');
-        return;
-      }
-      if (password.length < 4) {
-        alert('Please enter a password.');
-        return;
-      }
-      //Firebase function to authenticate user's email and password
-      firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // [START_EXCLUDE]
-        if (errorCode === 'auth/wrong-password') {
-          alert('Wrong password.');
-        } else {
-          alert(errorMessage);
-        }
-        console.log(error);
-        $(this).prop("disabled", false);
-        
-        // [END_EXCLUDE]
-      });
-    $(this).prop("disabled", true) //disable logIn function after firebase approves user authentication
-    }
-  })
+
+
+  // .then(function(user){
+  //   console.log("User " + user.uid + " created successfully!");
+    
+
+  //   var userRef = firebase.database().ref("userInfo");
+  //     userRef.set({
+  //     name: user.displayName,
+  //     email: user.email,
+  //     uid: user.uid,
+  //     emailVerified: user.emailVerified,
+  //   })
+
+  // })
 
   $(".createAccount").on("click",function() {
     $(".card-title").text("Create An Account");
@@ -83,6 +101,7 @@ $(function (){
     $("#logIn").show();
     $("#signUp").hide();
     $(".logInPage").hide();
+    $(".signUpPage").show();
   })
 
 //Function to listen for authentication changes, aka signed in or signed out
@@ -96,15 +115,20 @@ $(function (){
       // [END_EXCLUDE]
 
       if (user) { //When user is signed in.
-        //$(".loginTitle").html("<p class='lead'>Welcome back!</p>");
-        //$(".usernameInput").html("<p class='lead'>Your profile from last game</p>");
-        //$(".passwordInput").hide();
-        //$(".loginFooter").hide();
+        $(".loginTitle").text("Welcome Back!");
+        $(".loginFooter").hide();
+        $(".usernameInput").hide();
+        $(".passwordInput").hide();
+        $("#logIn").text("Logout");
 
-        //redirect user to next page library
-        window.location ="library.html";
+        //Create button direct user to library after login
+        var toLibraryBtn = $("<button>").addClass("btn btn-info toLibrary").text("Let's Play!");
+        $("#playBtn").append(toLibraryBtn);
+
+        $(document).on("click", ".toLibrary", function(){
+          window.location ="library.html";
+        })
        
-
         var displayName = user.displayName;
         var email = user.email;
         var emailVerified = user.emailVerified;
@@ -115,21 +139,15 @@ $(function (){
         
 
         //then add user info to database
-        var userRef = firebase.database().ref("userInfo");
-        userRef.set({
-        name: user.displayName,
-        email: user.email,
-        uid: user.uid,
-        emailVerified: user.emailVerified,
-      })
+        
 
           //Display for monitoring purpose
         $("#sign-in-status").text("Signed In");
         var currentUserInfo = JSON.stringify(user, null, '  ');//when sending data to server, data has to be a string
         $("#account-details").text(currentUserInfo);
         
-          //Change login button to logout
-        $("#logIn").text("Logout").addClass("btn-secondary"); 
+          //Change login button to logout (toogle)
+        
         
         if (!emailVerified) { //If user is signed in but has not been verified thru email
           $("#verifyEmail").prop("disabled", false);
@@ -137,10 +155,15 @@ $(function (){
         
       }else{ //When user is signed out.
         // [START_EXCLUDE]
+        $("#logIn").text("Login");
+        $(".loginTitle").text("Login");
+        $("#userInput").show();
+        $(".loginFooter").show();
+        $("#playBtn").empty();
         $(".welcomeBack").hide();
-        $("#sign-in-status").text("Signed out")
+        $("#sign-in-status").text("Signed out");
         $("#account-details").text("null");
-        $("#signIn").text("Login") //change back to login
+         //change back to login
         // [END_EXCLUDE]
       }
     });
