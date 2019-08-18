@@ -28,7 +28,9 @@ h1{
 #lifeA3 {
 /* flex: 1; */
 float:left;
-margin-left:1%;    
+margin-left:1%;  
+margin-top: 1rem; 
+margin-bottom: 1rem; 
 height:5px;
 width: 31%;
 border: 2px solid red;

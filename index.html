@@ -25,9 +25,11 @@
       <div class="col-md-5 mb-1 text-center">
         <div class="card">
 
-          <section class="card-header loginTitle">
+          <section class="card-header">  
+            <h3 class="loginTitle">Login</h3>
+          </section>
+          <section class="card-body" id="playBtn">
 
-            <h3>Login</h3>
           </section>
           <section class="card-body">
             <form>
@@ -38,23 +40,24 @@
                 <input type="password" class="form-control" id="password" name="password" autocomplete="off"
                   placeholder="password">
               </div>
-              
               <div class="form-group">
                 <button class="btn btn-primary" type="submit" id="logIn" name="login">Login</button>
                 <button class="btn btn-primary" type="submit" id="signUp" name="signup">Sign Up</button>
-
-                <!-- N/A for this game, do NOT delete
-                <button class="btn btn-info d-none" type="submit" id="verifyEmail" name="verify-email">Send Email Verification</button>
-                <button class="btn btn-info" type="submit" id="resetPassword" name="verify-email">Send Password Reset Email</button>
+                
+                <!-- N/A for this game, but do NOT delete
+                  <button class="btn btn-info d-none" type="submit" id="verifyEmail" name="verify-email">Send Email Verification</button>
+                  <button class="btn btn-info" type="submit" id="resetPassword" name="verify-email">Send Password Reset Email</button>
                 -->
               </div>
-              <div class="card-footer loginFooter">
-                <small class="signUpPage">Don't have a account? <a class="createAccount" href="#">Create One</a></small>
-                <small class="logInPage">Have an account? <a class="logInLink" href="#">Log in !</a></small>
-
-              </div>
             </form>
+          </section>   
+
+          <section class="card-footer loginFooter">
+            <small class="signUpPage">Don't have a account? <a class="createAccount" href="#">Create One</a></small>
+            <small class="logInPage">Have an account? <a class="logInLink" href="#">Log in !</a></small>
           </section>
+            
+          
         </div>
       </div>
     </div>

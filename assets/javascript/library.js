@@ -184,7 +184,7 @@ function mainEntreeStats() {
 
 		$(".main-entree").append(entreeItem);
 
-		var APIkey1 = '937a0db4501c979acd6238b0d2944f3f';
+		var APIkey1 = '3498926a92497feb70e057880c0326d0';
 		var mainFood = this.searchTerm.split(' ').join('%20');
 		var queryURL1 = 'https://api.edamam.com/api/food-database/parser?ingr=' + mainFood + '&app_id=4cb41cfc&app_key=' + APIkey1;
 
@@ -233,7 +233,7 @@ function sideDishStats() {
 
 		$(".side-dish").append(sideItem);
 
-		var APIkey2 = '9e3689f29fe4c6c1734056093c70c321';
+		var APIkey2 = 'fa9c22c3dfd72e11f98b43396891c193';
 		var sideFood = this.searchTerm.split(' ').join('%20');
 		var queryURL2 = 'https://api.edamam.com/api/food-database/parser?ingr=' + sideFood + '&app_id=4cb41cfc&app_key=' + APIkey2;
 
@@ -279,7 +279,7 @@ function dessertStats() {
 
 		$(".dessert").append(dessertItem);
 
-		var APIkey3 = 'e0b064a470f62c47babb0a7f575594fe';
+		var APIkey3 = 'a3d84c7df38daa7d5c1e84ee7140cc42';
 		var dessertType = this.searchTerm.split(' ').join('%20');
 		var queryURL3 = 'https://api.edamam.com/api/food-database/parser?ingr=' + dessertType + '&app_id=4cb41cfc&app_key=' + APIkey3;
 
@@ -321,5 +321,15 @@ $('.toMapBtn').on('click', function() {
 })
 
 //FIREBASE
+$(".logoutBtn").on("click", function(){
+	firebase.auth().signOut();
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      console.log("user is still signed in")
+    } else {
+      window.location = "index.html"
+    }
+  })
+})
 
 
